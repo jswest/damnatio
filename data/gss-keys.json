@@ -1,0 +1,94 @@
+{
+	"order": [
+		"year",
+		"sex",
+		"grade",
+		"degree",
+		"party",
+		"politics",
+		"deathPenalty"
+	],
+	"names": {
+		"year": "Year of Survey [#Core]",
+		"sex": "Sex [#Demographic #Core]",
+		"grade": "Highest Grade Completed [#Demographic]",
+		"degree": "Highest Degree Received [#Demographic #Core]",
+		"party": "Political Party (Condensed) [#Politics #Core]",
+		"politics": "Liberalism-Conservatism (Condensed) [#Politics #Core]",
+		"deathPenalty": "Death Penalty for Murderers [#Govt]"
+	},
+	"keys": {
+		"Year of Survey [#Core]": [
+		  1974,
+		  1976,
+		  1978,
+		  1980,
+		  1982,
+		  1984,
+		  1986,
+		  1988,
+		  1990,
+		  1993,
+		  1994,
+		  1996,
+		  1998,
+		  2000,
+		  2002,
+		  2004,
+		  2006,
+		  2008,
+		  2010,
+		  2012
+		],
+		"Sex [#Demographic #Core]": [
+			"Female",
+			"Male"
+		],
+		"Highest Grade Completed [#Demographic]": [
+			0,
+			1,
+			2,
+			3,
+			4,
+			5,
+			6,
+			7,
+			8,
+			9,
+			10,
+			11,
+			12,
+			13,
+			14,
+			15,
+			16,
+			17,
+			18,
+			19,
+			20
+		],
+		"Highest Degree Received [#Demographic #Core]": [
+			"Bachelor",
+			"Less than High School",
+			"High School",
+			"Graduate",
+			"Junior College"
+		],
+		"Political Party (Condensed) [#Politics #Core]": [
+			"Independent",
+			"Democrat",
+			"Republican",
+			"Other Party"
+		],
+		"Liberalism-Conservatism (Condensed) [#Politics #Core]": [
+			"Moderate",
+			"Conservative",
+			"Liberal"
+		],
+		"Death Penalty for Murderers [#Govt]": [
+			"Favor",
+			"Don't Know",
+			"Oppose"
+		]
+	}
+}

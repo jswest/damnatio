@@ -1,0 +1,9 @@
+[
+  "Year of Survey [#Core]",
+  "Sex [#Demographic #Core]",
+  "Highest Grade Completed [#Demographic]",
+  "Highest Degree Received [#Demographic #Core]",
+  "Political Party (Condensed) [#Politics #Core]",
+  "Liberalism-Conservatism (Condensed) [#Politics #Core]",
+  "Death Penalty for Murderers [#Govt]"
+]

@@ -1,0 +1,11 @@
+{
+	"name": "damnatio",
+	"description": "a series of interactive graphs exploring the death penalty in the united states",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+		"csv": "0.3.x",
+		"express": "3.4.x",
+		"jade": "0.35.x"
+	}
+}
