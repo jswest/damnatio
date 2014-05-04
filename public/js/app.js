@@ -1,6 +1,19 @@
 DAB = {};
 $(document).ready( function () {
-	var section = new DAB.GSSSection({
+
+	DAB.sections = [];
+
+
+	var IntroSection = function () {
+		var that = this;
+		var wh = $(window).height();
+		$('#intro-section').height( wh );
+		this.on = function () {};
+	};
+
+	DAB.sections[0] = new IntroSection();
+
+	DAB.sections[1] = new DAB.GSSSection({
 		"el": $('#gss-sex-section'),
 		"elName": 'gss-sex-section',
 		"name": "sex",
@@ -16,9 +29,8 @@ $(document).ready( function () {
 			"male"
 		]
 	});
-	section.on();
 
-	var section = new DAB.GSSSection({
+	DAB.sections[2] = new DAB.GSSSection({
 		"el": $('#gss-party-section'),
 		"elName": 'gss-party-section',
 		"name": 'party',
@@ -38,9 +50,8 @@ $(document).ready( function () {
 			"other-party"
 		]
 	});
-	section.on();
 
-	var section = new DAB.GSSSection({
+	DAB.sections[3] = new DAB.GSSSection({
 		"el": $('#gss-politics-section'),
 		"elName": 'gss-politics-section',
 		"name": 'politics',
@@ -58,9 +69,8 @@ $(document).ready( function () {
 			"liberal"
 		]
 	});
-	section.on();
 
-	var section = new DAB.GSSSection({
+	DAB.sections[4] = new DAB.GSSSection({
 		"el": $('#gss-education-section'),
 		"elName": 'gss-education-section',
 		"name": 'degree',
@@ -82,5 +92,17 @@ $(document).ready( function () {
 			"junior-college"
 		]
 	});
-	section.on();
+
+	DAB.router = new DAB.Router();
+	Backbone.history.start({
+		pushState: true,
+		root: '/'
+	});
+
+  $('.section').on( 'inview', DAB.inviewHandler );
+  $('.section').on( 'outview', DAB.outviewHandler );
+  DAB.debouncedScrollHandler = _.debounce( DAB.scrollHandler, 10 );
+  $('.content').on( 'scroll', DAB.debouncedScrollHandler );
+
+
 });

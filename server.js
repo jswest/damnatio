@@ -19,6 +19,7 @@ app.configure( function () {
 });
 
 app.get( '/', section.home );
+app.get( '/:id/:slug', section.home );
 app.get( '/support', gss.support );
 
 // Start yer engines.
