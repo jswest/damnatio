@@ -24,9 +24,6 @@ var getAnswersByYear = function ( rawAnswers ) {
 
 getYearlyAverages = function ( data, facet, segment ) {
 	var returnData = [];
-
-	console.log( segment );
-
 	for ( var i = 0; i < gssKeys.keys["Year of Survey [#Core]"].length; i++ ) {
 		var year = gssKeys.keys["Year of Survey [#Core]"][i] + '-01-01';
 		var yearlyFavor = 0;
