@@ -22,39 +22,42 @@ var getAnswersByYear = function ( rawAnswers ) {
 	return dataByYear;
 }
 
-getYearlyAverages = function ( data, field ) {
+getYearlyAverages = function ( data, facet, segment ) {
 	var returnData = [];
+
+	console.log( segment );
 
 	for ( var i = 0; i < gssKeys.keys["Year of Survey [#Core]"].length; i++ ) {
 		var year = gssKeys.keys["Year of Survey [#Core]"][i] + '-01-01';
 		var yearlyFavor = 0;
-		var yearlyOppose = 0;
-		var yearlyDontKnow = 0;
+		var facetTotal = 0;
 		for ( var j = 0; j < data[year].length; j++ ) {
-			if ( data[year][j][gssKeys.order.indexOf( 'deathPenalty' )] === 'Favor' ) {
-				yearlyFavor++;
-			}
-			else if ( data[year][j][gssKeys.order.indexOf( 'deathPenalty' )] === 'Oppose' ) {
-				yearlyOppose++;
-			}
-			else if ( data[year][j][gssKeys.order.indexOf( 'deathPenalty' )] === 'Don\'t Know' ) {
-				yearlyDontKnow++;
+			if ( facet !== 'all' && facet ) {
+				if ( data[year][j][gssKeys.order.indexOf( facet )] === segment ) {
+					facetTotal++;
+					if ( data[year][j][gssKeys.order.indexOf( 'deathPenalty' )] === 'Favor' ) {
+						yearlyFavor++;
+					}
+				}		
+			} else {
+				facetTotal++;
+				if ( data[year][j][gssKeys.order.indexOf( 'deathPenalty' )] === 'Favor' ) {
+					yearlyFavor++;
+				}
 			}
 		}
-		var favorAverage = Math.round( ( yearlyFavor / data[year].length ) * 100 );
-		var opposeAverage = Math.round( ( yearlyOppose / data[year].length ) * 100 );
-		var dontKnowAverage = Math.round( ( yearlyDontKnow / data[year].length ) * 100 );
+		var favorAverage = Math.round( ( yearlyFavor / facetTotal ) * 100 );
 		returnData.push( {
 			"year": year,
 			"favor": favorAverage,
-			"oppose": opposeAverage,
-			"dontKnow": dontKnowAverage 
 		} );
 	}
 	return returnData;
 };
 
 exports.support = function ( req, res ) {
+	var segment = req.query.segment;
+	var facet = req.query.facet;
 	var data = getAnswersByYear( gssAnswers );
-	res.send( getYearlyAverages( data ) );
+	res.send( getYearlyAverages( data, facet, segment ) );
 }
