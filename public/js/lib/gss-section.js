@@ -151,7 +151,7 @@ DAB.GSSSection = function ( settings ) {
     .scale( yScale )
     .orient( 'left' )
     .ticks( 5 )
-    .tickSize( -ww + padding.left + padding.right + 110 );
+    .tickSize( -ww + padding.left + padding.right + padding.left );
   svg.append( 'g' ).attr( 'class', 'y-axis' );
   svg.select( 'g.y-axis' )
     .call( yAxis )
