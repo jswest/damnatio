@@ -20,10 +20,11 @@ svg g.y-axis line, svg g.x-axis line { stroke: #969696; stroke-width: 0.5px; }
 #intro-section { height: 3000px; }
 #intro-section h1 { font-size: 100px; letter-spacing: 2px; padding-top: 300px; text-align: center; }
 
-.menu { background-color: #646464; opacity: .5; overflow: hidden; position: absolute; top: 10px; right: 110px; width: 300px; height: 50px; }
-
-.menu li:first-child { font-size: 20px; }
-
-.menu li { color: white; cursor: pointer; font-family: "Source Sans Pro"; font-size: 15px; font-weight: 100; text-align: center; letter-spacing: 2px; line-height: 50px; text-transform: uppercase; width: 100%; height: 50px; }
+.menu { background-color: #646464; overflow: hidden; position: absolute; top: 10px; right: 110px; width: 300px; height: 30px; }
+.menu li:first-child { font-weight: 800; padding-left: 20px; width: 280px; }
+.menu li:hover { background-color: #969696; }
+.menu li { color: #c8c8c8; cursor: pointer; font-family: "Source Sans Pro"; font-size: 15px; font-weight: 100; letter-spacing: 1.5px; line-height: 30px; list-style: none; position: relative; text-align: left; text-transform: uppercase; width: 300px; height: 30px; }
+.menu li .colorblock { float: left; width: 5px; height: 30px; }
+.menu li .name { float: left; padding-left: 15px; width: 280px; height: 30px; }
 
 .menu.clicked { height: auto; }

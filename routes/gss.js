@@ -29,7 +29,7 @@ getYearlyAverages = function ( data, facet, segment ) {
 		var yearlyFavor = 0;
 		var facetTotal = 0;
 		for ( var j = 0; j < data[year].length; j++ ) {
-			if ( facet !== 'all' && facet ) {
+			if ( segment !== 'all' && facet ) {
 				if ( data[year][j][gssKeys.order.indexOf( facet )] === segment ) {
 					facetTotal++;
 					if ( data[year][j][gssKeys.order.indexOf( 'deathPenalty' )] === 'Favor' ) {

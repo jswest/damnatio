@@ -86,12 +86,19 @@ DAB.GSSSection = function ( settings ) {
   ];
 
   var buildMenu = function () {
-    settings.el.append( '<ul class="menu"><li class="control">' + settings.menuNicename + '</li></ul>' );
+    settings.el.append( '<ul class="menu clicked"><li class="control">' + settings.menuNicename + '</li></ul>' );
     var menu = settings.el.find( '.menu' );
+    var noSegmentString = 
+      '<li data-index="0" class="selected" data-segment-slug="all" data-segment="all">' +
+        '<div class="colorblock" style="background-color:' + colorScale( 0 ) + '"></div>' +
+        '<div class="name">All</div>' +
+      '</li>'
+    menu.append( noSegmentString );
     for ( var i = 0; i < settings.segments.length; i++ ) {
       var segmentString = 
         '<li data-index="' + ( i + 1 ) + '" data-segment-slug="' + settings.segmentSlugs[i] + '" data-segment="' + settings.segments[i] + '">' +
-        settings.segments[i] +
+          '<div class="colorblock" style="background-color:' + colorScale( i + 1 ) + '"></div>' +
+          '<div class="name">' + settings.segments[i] + '</div>'
         '</li>'
       menu.append( segmentString );
     }
@@ -167,7 +174,7 @@ DAB.GSSSection = function ( settings ) {
       })
       .interpolate( 'linear' );
     path = svg.append( 'path' )
-      .attr( 'stroke', '#FFFFFF' )
+      .attr( 'stroke', 'rgb(150,150,150)' )
       .attr( 'class', 'line ' + name )
       .attr( 'd', line( dummyData ) );
   }

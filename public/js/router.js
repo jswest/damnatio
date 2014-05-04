@@ -1,4 +1,4 @@
-DG.Router = Backbone.Router.extend({
+DAB.Router = Backbone.Router.extend({
 
 	// Define the routes.
 	routes: {
