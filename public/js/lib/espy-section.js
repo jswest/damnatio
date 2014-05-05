@@ -153,12 +153,11 @@ DAB.EspySection = function ( settings ) {
   var stackData = function ( data, segment ) {
     var options = _.keys( data[0] );
     options.pop();
-    options.pop();
 
     var stackedData = [];
 
     for ( var i = 0; i < options.length; i++ ) {
-      optionArray = [];
+      var optionArray = [];
       for ( var j = 0; j < data.length; j++ ) {
         var yearEntry = { "x": data[j].year, "y": data[j][options[i]] };
         yearEntry[segment] = options[i];
