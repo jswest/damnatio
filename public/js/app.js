@@ -93,7 +93,19 @@ $(document).ready( function () {
 		]
 	});
 
-	DAB.sections[5] = new DAB.EspySection();
+	DAB.sections[5] = new DAB.EspySection({
+		"el": $('#espy-section'),
+		"url": "/espy",
+		"menuNicename": "Segments",
+		"segments": [
+			"method",
+			"race"
+		],
+		"segmentSlugs": [
+			"method",
+			"race"
+		]
+	});
 
 	DAB.router = new DAB.Router();
 	Backbone.history.start({

@@ -31,8 +31,46 @@ var sortDataByMethod = function ( data ) {
 
   return returnData;
 
+};
+
+var sortDataByRace = function ( data ) {
+  
+  var races = [];
+  for ( var i = 0; i < data.length; i++ ) {
+    if ( races.indexOf( data[i].race ) === -1 ) {
+      races.push( data[i].race )
+    }
+  }
+
+  var dataByYear = {};
+  for ( var i = 1608; i <= 2002; i++ ) {
+    var yearsData = {};
+    for ( var j = 0; j < races.length; j++ ) {
+      yearsData[races[j]] = 0;
+    }
+    dataByYear[i.toString()] = yearsData;
+  }
+
+  for ( var i = 0; i < data.length; i++ ) {
+    var year = data[i].year;
+    dataByYear[year][data[i].race]++;
+  }
+
+  var returnData = [];
+  for ( var i = 1608; i <= 2002; i++ ) {
+    dataByYear[i.toString()].year = i.toString();
+    returnData.push( dataByYear[i.toString()] );
+  }
+
+  return returnData;
 }
-exports.method = function ( req, res ) {
-  var data = sortDataByMethod( espyData );
+exports.espy = function ( req, res ) {
+  var segment = req.query.segment;
+  if ( segment === "method" ) {
+    var data = sortDataByMethod( espyData );
+  }
+  else if ( segment === "race" ) {
+    var data = sortDataByRace( espyData );
+  }
   res.send( data );
 }

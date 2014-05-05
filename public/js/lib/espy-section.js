@@ -1,6 +1,45 @@
-DAB.EspySection = function () {
+DAB.EspySection = function ( settings ) {
 
   var that = this;
+
+  var buildMenu = function () {
+    settings.el.append( '<ul class="menu clicked"><li class="control">' + settings.menuNicename + '</li></ul>' );
+    var menu = settings.el.find( '.menu' );
+    for ( var i = 0; i < settings.segments.length; i++ ) {
+      var segmentString = 
+        '<li data-index="' + ( i + 1 ) + '" data-segment-slug="' + settings.segmentSlugs[i] + '" data-segment="' + settings.segments[i] + '">' +
+          '<div class="colorblock" style="background-color:transparent"></div>' +
+          '<div class="name">' + settings.segments[i] + '</div>'
+        '</li>'
+      menu.append( segmentString );
+    }
+    menu.find( 'li' ).eq( 1 ).addClass( 'selected' );
+  };
+
+  var bindMenu = function () {
+    var menu = settings.el.find( '.menu' );
+    menu.find( 'li' ).on( 'click', function () {
+      var li = $(this);
+      if ( li.hasClass( 'control' ) ) {
+        $('.menu').toggleClass( 'clicked' )
+      } else {
+        if ( li.hasClass( 'selected' ) ) {
+          removeGraph();
+        } else {
+          d3.json( settings.url + '?segment=' + li.data( 'segment' ), function ( data ) {
+            var stackedData = stackData( data, li.data( 'segment-slug' ) );
+            createGraph( stackedData, li.data( 'segment-slug' ) );
+          } );
+        }
+        li.toggleClass( 'selected' );   
+      }
+    });
+  };
+
+
+
+
+
   var ww = $(window).width()
   ,   wh = $(window).height();
   var padding = {
@@ -10,7 +49,7 @@ DAB.EspySection = function () {
     left: 100
   };
 
-  var svg = d3.select( '#espy-method' ).append( 'svg' )
+  var svg = d3.select( '#espy-section' ).append( 'svg' )
     .attr( 'width', $(window).width() )
     .attr( 'height', $(window).height() );
 
@@ -41,161 +80,126 @@ DAB.EspySection = function () {
     .call( yAxis )
     .attr( 'transform', 'translate(' + ( padding.left ) + ',0)' );
 
+  var stack = d3.layout.stack();
+
+
+  var removeGraph = function () {
+    svg.selectAll( 'rect' )
+      .transition()
+      .duration( 200 )
+      .attr( "y", yScale( 0 ) )
+      .attr( "height", 0 )
+      .remove();
+
+    svg.selectAll( 'g.layer' )
+      .remove()
+  };
+
+  var createGraph = function ( data, segment ) {
+
+    console.log( "createGraph() called" );
+
+    var stackedData = stack( data );
+
+    var groups = svg.selectAll( 'g.layer' )
+      .data( stackedData )
+      .enter()
+      .append( 'g' )
+      .attr( 'class', 'layer' )
+      .style( 'fill', function ( d, i ) { return colorScale( i ); } );
+
+    var rects = groups.selectAll("rect")
+      .data( function ( d ) { return d; } )
+      .enter()
+      .append( "rect" )
+      .attr( "x", function( d, i ) {
+        return xScale( new Date( d.x ) );
+      })
+      .attr( "width", xScale( new Date( '1609-01-01' ) ) - xScale( new Date( '1608-01-01' ) ) )
+      .attr( "y", yScale( 0 ) )
+      .attr( "height", 0 );
+
+    rects
+      .transition()
+      .duration( 200 )
+      .attr( "y", function( d ) {
+        return yScale(d.y0 + d.y);
+      })
+      .attr( "height", function( d ) {
+        return yScale( d.y0 ) - yScale( d.y0 + d.y ) ;
+      });
+    $('#espy-section').find( 'rect' )
+      .on( 'mouseover', function ( e ) {
+        var datum = d3.select( this ).datum();
+        var inspectorString = 
+          '<div class="inspector">' + datum[segment] + '</div>';
+        $('#espy-section').append( inspectorString );
+        if ( e.clientX > ww / 2 ) {
+          var left = e.clientX - 200;
+        } else {
+          var left = e.clientX;
+        }
+        $('.inspector').css({
+          'position': 'absolute',
+          'top': e.clientY,
+          'left': left,
+        });
+      })
+      .on( 'mouseout', function () {
+        $('.inspector').remove();
+      });    
+  };
+
+  var stackData = function ( data, segment ) {
+    var options = _.keys( data[0] );
+    options.pop();
+    options.pop();
+
+    var stackedData = [];
+
+    for ( var i = 0; i < options.length; i++ ) {
+      optionArray = [];
+      for ( var j = 0; j < data.length; j++ ) {
+        var yearEntry = { "x": data[j].year, "y": data[j][options[i]] };
+        yearEntry[segment] = options[i];
+        optionArray.push( yearEntry );
+      }
+      stackedData.push( optionArray );
+    }
+
+    return stackedData;
+  };
 
   this.on = function () {
 
-    d3.json( '/method', function ( data ) {
+    /*
+    var options = [
+      "Hanging",
+      "Shot",
+      "Electrocution",
+      "Asphyxiation-Gas",
+      "Injection",
+      "Burned",
+      "undefined",
+      "Other",
+      "Break on Wheel",
+      "Hung in Chains",
+      "Pressing",
+      "Bludgeoned",
+      "Gibbetted"
+    ];
+    */
 
-      var stackedData = [];
-      var methods = [
-        "Hanging",
-        "Shot",
-        "Electrocution",
-        "Asphyxiation-Gas",
-        "Injection",
-        "Burned",
-        "undefined",
-        "Other",
-        "Break on Wheel",
-        "Hung in Chains",
-        "Pressing",
-        "Bludgeoned",
-        "Gibbetted"
-      ];
-      for ( var i = 0; i < methods.length; i++ ) {
-        methodArray = [];
-        for ( var j = 0; j < data.length; j++ ) {
-          var yearEntry = { "x": data[j].year, "y": data[j][methods[i]], "method": methods[i] };
-          methodArray.push( yearEntry );
-        }
-        stackedData.push( methodArray );
-      }
+    var segment = "method";
 
-      var stack = d3.layout.stack();
-      var stackedData = stack( stackedData );
+    buildMenu();
+    bindMenu();
 
-      var groups = svg.selectAll( 'g.layer' )
-        .data( stackedData )
-        .enter()
-        .append( 'g' )
-        .style( 'fill', function ( d, i ) { return colorScale( i ); } )
-        .attr( 'id', function ( d, i ) {
-          return i;
-        });
-  
-      var rects = groups.selectAll("rect")
-        .data( function ( d ) { return d; } )
-        .enter()
-        .append( "rect" )
-        .attr( "x", function( d, i ) {
-          return xScale( new Date( d.x ) );
-        })
-        .attr( "width", xScale( new Date( '1609-01-01' ) ) - xScale( new Date( '1608-01-01' ) ) )
-        .attr( "y", yScale( 0 ) )
-        .attr( "height", 0 );
+    d3.json( settings.url + '?segment=' + segment, function ( data ) {
+      
 
-      rects
-        .transition()
-        .duration( 200 )
-        .attr( "y", function( d ) {
-          return yScale(d.y0 + d.y);
-        })
-        .attr( "height", function( d ) {
-          return yScale( d.y0 ) - yScale( d.y0 + d.y ) ;
-        });
-      $('#espy-method').find( 'rect' )
-        .on( 'mouseover', function ( e ) {
-          var datum = d3.select( this ).datum();
-          var inspectorString = 
-            '<div class="inspector">' + datum.method + '</div>';
-          $('#espy-method').append( inspectorString );
-          if ( e.clientX > ww / 2 ) {
-            var left = e.clientX - 200;
-          } else {
-            var left = e.clientX;
-          }
-          $('.inspector').css({
-            'position': 'absolute',
-            'top': e.clientY,
-            'left': left,
-          });
-        })
-        .on( 'mouseout', function () {
-          $('.inspector').remove();
-        });
-
-/*
-      var area = d3.svg.area()
-        .x( function( d ) { return xScale( new Date( d.x ) ); } )
-        .y0( function( d ) { return yScale( d.y ); } )
-        .y1(function( d ) { return yScale( d.y0 ) + yScale( d.y0 + d.y ); } );
-
-      svg.selectAll( "path" )
-        .data( stackedData )
-        .enter()
-        .append( "path" )
-        .attr( "d", area )
-        .style( "fill", function( d, i ) { return colorScale( i ); } );
-
-      $('#espy-method').find( 'path' )
-        .on( 'mouseover', function ( e ) {
-          var datum = d3.select( this ).datum();
-          var inspectorString = 
-            '<div class="inspector">' + datum.method + '</div>';
-          $('#espy-method').append( inspectorString );
-          if ( e.clientX > ww / 2 ) {
-            var left = e.clientX - 200;
-          } else {
-            var left = e.clientX;
-          }
-          $('.inspector').css({
-            'position': 'absolute',
-            'top': e.clientY,
-            'left': left,
-          });
-        })
-        .on( 'mouseout', function () {
-          $('.inspector').remove();
-        });
-*/
-
-      /*
-      var bars = svg.selectAll( 'rect' )
-        .data( data )
-        .enter();
-      bars.append( 'rect' )
-        .attr( "x", function( d ) { return xScale( new Date( d.year ) ); } )
-        .attr( "y", function( d ) { return wh - yScale( d["Hanging"] ); } )
-        .attr( "width", function ( d ) {
-         return xScale( new Date( '1609-01-01' ) ) - xScale( new Date( '1608-01-01' ) );
-        } )
-        .attr( "height", function( d ) { return yScale( d["Hanging"] ); } )
-        .style( "fill", colorScale( 0 ) );
-      bars.append( 'rect' )
-        .attr( 'x', function ( d ) { return xScale( new Date( d.year ) ); } )
-        .attr( 'y', function ( d ) { return wh - yScale( d["Hanging"] ) - yScale( d["Electrocution"] ); } )
-        .attr( "width", function ( d ) {
-         return xScale( new Date( '1609-01-01' ) ) - xScale( new Date( '1608-01-01' ) );
-        } )
-        .attr( "height", function ( d ) { return yScale( d["Electrocution"] ) } )
-        .style( "fill", colorScale( 1 ) );
-      bars.append( 'rect' )
-        .attr( 'x', function ( d ) { return xScale( new Date( d.year ) ); } )
-        .attr( 'y', function ( d ) { return wh - yScale( d["Hanging"] ) - yScale( d["Electrocution"] ) - yScale( d["Injection"] ); } )
-        .attr( "width", function ( d ) {
-         return xScale( new Date( '1609-01-01' ) ) - xScale( new Date( '1608-01-01' ) );
-        } )
-        .attr( "height", function ( d ) { return yScale( d["Injection"] ) } )
-        .style( "fill", colorScale( 2 ) );
-      bars.append( 'rect' )
-        .attr( 'x', function ( d ) { return xScale( new Date( d.year ) ); } )
-        .attr( 'y', function ( d ) { return wh - yScale( d["Hanging"] ) - yScale( d["Electrocution"] ) - yScale( d["Injection"] ) - yScale( d["Shot"] ); } )
-        .attr( "width", function ( d ) {
-         return xScale( new Date( '1609-01-01' ) ) - xScale( new Date( '1608-01-01' ) );
-        } )
-        .attr( "height", function ( d ) { return yScale( d["Shot"] ) } )
-        .style( "fill", colorScale( 3 ) );
-      */
+      var stackedData = stackData( data, segment );
+      createGraph( stackedData, segment );
     });
   };
 };

@@ -22,7 +22,7 @@ app.configure( function () {
 app.get( '/', section.home );
 app.get( '/:id/:slug', section.home );
 app.get( '/support', gss.support );
-app.get( '/method', espy.method );
+app.get( '/espy', espy.espy );
 
 // Start yer engines.
 http
