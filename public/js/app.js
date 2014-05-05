@@ -93,6 +93,8 @@ $(document).ready( function () {
 		]
 	});
 
+	DAB.sections[5] = new DAB.EspySection();
+
 	DAB.router = new DAB.Router();
 	Backbone.history.start({
 		pushState: true,

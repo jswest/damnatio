@@ -4,7 +4,8 @@ var express 	 = require( 'express' )
 ,		app				 = express();
 
 var section 	= require( './routes/section' )
-,	  gss  		  = require( './routes/gss' );
+,	  gss  		  = require( './routes/gss' )
+,		espy			= require( './routes/espy' );
 
 // Configure the app.
 app.configure( function () {
@@ -21,6 +22,7 @@ app.configure( function () {
 app.get( '/', section.home );
 app.get( '/:id/:slug', section.home );
 app.get( '/support', gss.support );
+app.get( '/method', espy.method );
 
 // Start yer engines.
 http
