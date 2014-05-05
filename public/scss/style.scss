@@ -8,6 +8,8 @@ $graphaxiscolor: rgb(150,150,150);
 $menubackgroundcolor: rgb(100,100,100);
 $menutextcolor: rgb(200,200,200);
 $menufont: "Source Sans Pro";
+$inspectortextcolor: rgb(0,0,0);
+$inspectorbackgroundcolor: rgb(200,200,200);
 
 
 /* general styles */
@@ -54,6 +56,16 @@ svg {
       stroke-width: 0.5px;
     }
   }
+}
+.inspector {
+  background-color: $inspectorbackgroundcolor;
+  color: $inspectortextcolor;
+  font-family: "Source Sans Pro";
+  font-size: 13px;
+  line-height: 50px;
+  text-align: center;
+  width: 200px;
+  height: 50px;
 }
 
 

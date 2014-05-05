@@ -65,7 +65,7 @@ DAB.EspySection = function () {
       for ( var i = 0; i < methods.length; i++ ) {
         methodArray = [];
         for ( var j = 0; j < data.length; j++ ) {
-          var yearEntry = { "x": data[j].year, "y": data[j][methods[i]] };
+          var yearEntry = { "x": data[j].year, "y": data[j][methods[i]], "method": methods[i] };
           methodArray.push( yearEntry );
         }
         stackedData.push( methodArray );
@@ -90,19 +90,45 @@ DAB.EspySection = function () {
         .attr( "x", function( d, i ) {
           return xScale( new Date( d.x ) );
         })
+        .attr( "width", xScale( new Date( '1609-01-01' ) ) - xScale( new Date( '1608-01-01' ) ) )
+        .attr( "y", yScale( 0 ) )
+        .attr( "height", 0 );
+
+      rects
+        .transition()
+        .duration( 200 )
         .attr( "y", function( d ) {
           return yScale(d.y0 + d.y);
         })
         .attr( "height", function( d ) {
           return yScale( d.y0 ) - yScale( d.y0 + d.y ) ;
+        });
+      $('#espy-method').find( 'rect' )
+        .on( 'mouseover', function ( e ) {
+          var datum = d3.select( this ).datum();
+          var inspectorString = 
+            '<div class="inspector">' + datum.method + '</div>';
+          $('#espy-method').append( inspectorString );
+          if ( e.clientX > ww / 2 ) {
+            var left = e.clientX - 200;
+          } else {
+            var left = e.clientX;
+          }
+          $('.inspector').css({
+            'position': 'absolute',
+            'top': e.clientY,
+            'left': left,
+          });
         })
-        .attr( "width", xScale( new Date( '1609-01-01' ) ) - xScale( new Date( '1608-01-01' ) ) )
+        .on( 'mouseout', function () {
+          $('.inspector').remove();
+        });
 
 /*
       var area = d3.svg.area()
         .x( function( d ) { return xScale( new Date( d.x ) ); } )
-        .y0( function( d ) { return wh - yScale( d.y0 ); } )
-        .y1(function( d ) { return wh - yScale( d.y0 + d.y ); } );
+        .y0( function( d ) { return yScale( d.y ); } )
+        .y1(function( d ) { return yScale( d.y0 ) + yScale( d.y0 + d.y ); } );
 
       svg.selectAll( "path" )
         .data( stackedData )
@@ -110,7 +136,29 @@ DAB.EspySection = function () {
         .append( "path" )
         .attr( "d", area )
         .style( "fill", function( d, i ) { return colorScale( i ); } );
+
+      $('#espy-method').find( 'path' )
+        .on( 'mouseover', function ( e ) {
+          var datum = d3.select( this ).datum();
+          var inspectorString = 
+            '<div class="inspector">' + datum.method + '</div>';
+          $('#espy-method').append( inspectorString );
+          if ( e.clientX > ww / 2 ) {
+            var left = e.clientX - 200;
+          } else {
+            var left = e.clientX;
+          }
+          $('.inspector').css({
+            'position': 'absolute',
+            'top': e.clientY,
+            'left': left,
+          });
+        })
+        .on( 'mouseout', function () {
+          $('.inspector').remove();
+        });
 */
+
       /*
       var bars = svg.selectAll( 'rect' )
         .data( data )
