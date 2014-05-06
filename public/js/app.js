@@ -92,15 +92,33 @@ $(document).ready( function () {
 			"junior-college"
 		]
 	});
+	DAB.sections[5] = new DAB.GSSSection({
+		"el": $('#gss-race-section'),
+		"elName": 'gss-race-section',
+		"name": 'race',
+		"nicename": "Race",
+		"menuNicename": "Race",
+		"facet": "race",
+		"segments": [
+			"Black",
+			"White",
+			"Other"
+		],
+		"segmentSlugs": [
+			"black",
+			"white",
+			"other"
+		]
+	});
 
-	DAB.sections[5] = new DAB.EspySection({
+	DAB.sections[6] = new DAB.EspySection({
 		"el": $('#espy-method-section'),
 		"url": "/espy",
 		"segment": "method",
 		"animationDuration": 1000
 	});
 
-	DAB.sections[6] = new DAB.EspySection({
+	DAB.sections[7] = new DAB.EspySection({
 		"el": $('#espy-race-section'),
 		"url": "/espy",
 		"segment": "race",
