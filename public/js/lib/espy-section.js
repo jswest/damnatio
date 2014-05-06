@@ -1,66 +1,34 @@
 DAB.EspySection = function ( settings ) {
 
+  // a little of this; a little of that
   var that = this;
 
-  var buildMenu = function () {
-    settings.el.append( '<ul class="menu clicked"><li class="control">' + settings.menuNicename + '</li></ul>' );
-    var menu = settings.el.find( '.menu' );
-    for ( var i = 0; i < settings.segments.length; i++ ) {
-      var segmentString = 
-        '<li data-index="' + ( i + 1 ) + '" data-segment-slug="' + settings.segmentSlugs[i] + '" data-segment="' + settings.segments[i] + '">' +
-          '<div class="colorblock" style="background-color:transparent"></div>' +
-          '<div class="name">' + settings.segments[i] + '</div>'
-        '</li>'
-      menu.append( segmentString );
-    }
-    menu.find( 'li' ).eq( 1 ).addClass( 'selected' );
+  // size variables
+  var ww      = $(window).width()
+  ,   wh      = $(window).height()
+  ,   padding = {
+    "top"    : 50,
+    "right"  : 10,
+    "bottom" : 100,
+    "left"   : 100
   };
 
-  var bindMenu = function () {
-    var menu = settings.el.find( '.menu' );
-    menu.find( 'li' ).on( 'click', function () {
-      var li = $(this);
-      if ( li.hasClass( 'control' ) ) {
-        $('.menu').toggleClass( 'clicked' )
-      } else {
-        if ( li.hasClass( 'selected' ) ) {
-          removeGraph();
-        } else {
-          d3.json( settings.url + '?segment=' + li.data( 'segment' ), function ( data ) {
-            var stackedData = stackData( data, li.data( 'segment-slug' ) );
-            createGraph( stackedData, li.data( 'segment-slug' ) );
-          } );
-        }
-        li.toggleClass( 'selected' );   
-      }
-    });
-  };
+  // the SVG element and variable
+  var svg = d3.select( settings.el[0] ).append( 'svg' )
+    .attr( 'width', ww )
+    .attr( 'height', wh );
 
-
-
-
-
-  var ww = $(window).width()
-  ,   wh = $(window).height();
-  var padding = {
-    top: 50,
-    right: 10,
-    bottom: 100,
-    left: 100
-  };
-
-  var svg = d3.select( '#espy-section' ).append( 'svg' )
-    .attr( 'width', $(window).width() )
-    .attr( 'height', $(window).height() );
-
-  var xScale = d3.time.scale()
+  // scales & misc scale variables
+  var xScale        = d3.time.scale()
     .domain( [ new Date( '1608-01-01' ), new Date( '2002-01-01' ) ] )
-    .range( [ padding.left, ww - padding.left - padding.right ] );
-  var yScale = d3.scale.linear()
+    .range( [ padding.left, ww - padding.left - padding.right ] )
+  ,   yScale        = d3.scale.linear()
     .domain( [ 200, 0 ] )
-    .range( [ padding.top, wh - padding.bottom ] );
-  var colorScale = d3.scale.category20();
+    .range( [ padding.top, wh - padding.bottom ] )
+  ,   colorScale    = d3.scale.category20();
+  var oneYearsWidth = xScale( new Date( '1609-01-01' ) ) - xScale( new Date( '1608-01-01' ) );
 
+  // axes
   var xAxis = d3.svg.axis()
     .scale( xScale )
     .orient( 'bottom' )
@@ -69,7 +37,6 @@ DAB.EspySection = function ( settings ) {
   svg.select( 'g.x-axis' )
     .call( xAxis )
     .attr( 'transform', 'translate(0,' + ( wh - padding.bottom ) + ')' );
-
   var yAxis = d3.svg.axis()
     .scale( yScale )
     .orient( 'left' )
@@ -80,125 +47,124 @@ DAB.EspySection = function ( settings ) {
     .call( yAxis )
     .attr( 'transform', 'translate(' + ( padding.left ) + ',0)' );
 
+  // the stack
   var stack = d3.layout.stack();
 
 
-  var removeGraph = function () {
-    svg.selectAll( 'rect' )
-      .transition()
-      .duration( 200 )
-      .attr( "y", yScale( 0 ) )
-      .attr( "height", 0 )
-      .remove();
-
-    svg.selectAll( 'g.layer' )
-      .remove()
-  };
-
-  var createGraph = function ( data, segment ) {
-
-    console.log( "createGraph() called" );
-
+  var createGraph = function ( data ) {
     var stackedData = stack( data );
 
     var groups = svg.selectAll( 'g.layer' )
       .data( stackedData )
       .enter()
-      .append( 'g' )
-      .attr( 'class', 'layer' )
+      .append( 'g' ).attr( 'class', 'layer' )
       .style( 'fill', function ( d, i ) { return colorScale( i ); } );
 
-    var rects = groups.selectAll("rect")
+    rects = groups.selectAll( 'rect' )
       .data( function ( d ) { return d; } )
       .enter()
-      .append( "rect" )
-      .attr( "x", function( d, i ) {
+      .append( 'rect' )
+      .attr( 'x', function ( d, i ) {
         return xScale( new Date( d.x ) );
       })
-      .attr( "width", xScale( new Date( '1609-01-01' ) ) - xScale( new Date( '1608-01-01' ) ) )
-      .attr( "y", yScale( 0 ) )
-      .attr( "height", 0 );
+      .attr( 'y', yScale ( 0 ) ) // let's animate them from 0 to their real position
+      .attr( 'width', oneYearsWidth )
+      .attr( 'height', 0 ); // ditto
 
     rects
       .transition()
-      .duration( 200 )
-      .attr( "y", function( d ) {
-        return yScale(d.y0 + d.y);
-      })
-      .attr( "height", function( d ) {
-        return yScale( d.y0 ) - yScale( d.y0 + d.y ) ;
-      });
-    $('#espy-section').find( 'rect' )
-      .on( 'mouseover', function ( e ) {
-        var datum = d3.select( this ).datum();
-        var inspectorString = 
-          '<div class="inspector">' + datum[segment] + '</div>';
-        $('#espy-section').append( inspectorString );
-        if ( e.clientX > ww / 2 ) {
-          var left = e.clientX - 200;
-        } else {
-          var left = e.clientX;
-        }
-        $('.inspector').css({
-          'position': 'absolute',
-          'top': e.clientY,
-          'left': left,
-        });
-      })
-      .on( 'mouseout', function () {
-        $('.inspector').remove();
-      });    
+      .duration( settings.animationDuration )
+      .attr( 'y', function ( d ) { return yScale( d.y0 + d.y ); } ) // this is a bit of magic, as i don't really get the stack layout
+      .attr( 'height', function ( d ) { return yScale( d.y0 ) - yScale( d.y0 + d.y ); } ); // ditto
+
+    // for now, i'm using jQuery events because
+    // (1) i'm lazy and
+    // (2) i want to be able to access the e.clientX/e.clientY variables
+    // here are the utility functions for all of this:
+    // function to check for the best place to put the inspector
+    var placeInspector = function ( e ) {
+      var left
+      ,   top
+      ,   inspector = settings.el.find( '.inspector' );
+      if ( e.clientX > ww / 2 ) {
+        left = e.clientX - inspector.width();
+      } else {
+        left = e.clientX;
+      }
+      if ( e.clientY > wh / 2 ) {
+        top = e.clientY - inspector.height()
+      } else {
+        top = e.clientY;
+      }
+      inspector.css( { 'top': top, 'left': left } );
+    };
+    // handler for the mouseover event
+    var rectMouseoverHandler = function ( e ) {
+      var datum = d3.select( this ).datum();
+
+      // append the inspector with the label
+      settings.el.append(
+        '<div class="inspector">' + 
+          datum[settings.segment] +
+        '</div>'
+      );
+
+      placeInspector( e );
+      $(this).on( 'mousemove', rectMousemoveHandler );
+      $(this).on( 'mouseleave', rectMouseleaveHandler );
+    };
+    // handler for the mousemove event
+    var rectMousemoveHandler = function ( e ) {
+      placeInspector( e );
+    }
+    // handler for the mouseleave event
+    var rectMouseleaveHandler = function ( e ) {
+      $('.inspector').remove();
+      $(this).off( 'mousemove', 'rectMousemoveHandler' );
+      $(this).off( 'mouseleave', 'rectMouseleaveHandler' );
+    };
+
+    settings.el.find( '.layer' ).find( 'rect' )
+      .on( 'mouseover', rectMouseoverHandler );
   };
 
-  var stackData = function ( data, segment ) {
-    var options = _.keys( data[0] );
-    options.pop();
 
-    var stackedData = [];
+  var beginStackingData = function ( data, segment ) {
+    var options = _.keys( data[0] ); // get the fields we're turning into layers
+    options.pop(); // eliminate the 'year' field because we don't want that to be a layer
 
+    // interate over the options, which will become the "layers" of the stack
+    // then, for each of them, iterate over the years worth of data
+    // push the year's entry into a new array, which will have the structure:
+    // [
+    //    [ // array representing a group
+    //      { "x": year, "y": value },
+    //      etc.
+    //    ],
+    //    [ // array representing a group
+    //      { "x": year, "y": value },
+    //      etc.
+    //    ],
+    //    etc.
+    // ]
+    var initiallyStackedData = [];
     for ( var i = 0; i < options.length; i++ ) {
       var optionArray = [];
       for ( var j = 0; j < data.length; j++ ) {
-        var yearEntry = { "x": data[j].year, "y": data[j][options[i]] };
-        yearEntry[segment] = options[i];
-        optionArray.push( yearEntry );
+        var entry = { "x": data[j].year, "y": data[j][options[i]] };
+        entry[segment] = options[i];
+        optionArray.push( entry );
       }
-      stackedData.push( optionArray );
+      initiallyStackedData.push( optionArray );
     }
 
-    return stackedData;
+    return initiallyStackedData;
   };
 
   this.on = function () {
-
-    /*
-    var options = [
-      "Hanging",
-      "Shot",
-      "Electrocution",
-      "Asphyxiation-Gas",
-      "Injection",
-      "Burned",
-      "undefined",
-      "Other",
-      "Break on Wheel",
-      "Hung in Chains",
-      "Pressing",
-      "Bludgeoned",
-      "Gibbetted"
-    ];
-    */
-
-    var segment = "method";
-
-    buildMenu();
-    bindMenu();
-
-    d3.json( settings.url + '?segment=' + segment, function ( data ) {
-      
-
-      var stackedData = stackData( data, segment );
-      createGraph( stackedData, segment );
+    d3.json( settings.url + '?segment=' + settings.segment, function ( data ) {
+      createGraph( beginStackingData( data, settings.segment ) );
     });
   };
+
 };

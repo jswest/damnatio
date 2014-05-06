@@ -94,17 +94,17 @@ $(document).ready( function () {
 	});
 
 	DAB.sections[5] = new DAB.EspySection({
-		"el": $('#espy-section'),
+		"el": $('#espy-method-section'),
 		"url": "/espy",
-		"menuNicename": "Segments",
-		"segments": [
-			"method",
-			"race"
-		],
-		"segmentSlugs": [
-			"method",
-			"race"
-		]
+		"segment": "method",
+		"animationDuration": 1000
+	});
+
+	DAB.sections[6] = new DAB.EspySection({
+		"el": $('#espy-race-section'),
+		"url": "/espy",
+		"segment": "race",
+		"animationDuration": 1000
 	});
 
 	DAB.router = new DAB.Router();
