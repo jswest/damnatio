@@ -110,15 +110,35 @@ $(document).ready( function () {
 			"other"
 		]
 	});
+	DAB.sections[6] = new DAB.GSSSection({
+		"el": $('#gss-religion-section'),
+		"elName": 'gss-religion-section',
+		"name": 'religion',
+		"nicename": "Religion",
+		"menuNicename": "Religion",
+		"facet": "religion",
+		"segments": [
+			'Other',
+			'Catholic',
+			'Protestant',
+			'None'
+		],
+		"segmentSlugs": [
+			'other',
+			'catholic',
+			'protestant',
+			'none'
+		]
+	});
 
-	DAB.sections[6] = new DAB.EspySection({
+	DAB.sections[7] = new DAB.EspySection({
 		"el": $('#espy-method-section'),
 		"url": "/espy",
 		"segment": "method",
 		"animationDuration": 1000
 	});
 
-	DAB.sections[7] = new DAB.EspySection({
+	DAB.sections[8] = new DAB.EspySection({
 		"el": $('#espy-race-section'),
 		"url": "/espy",
 		"segment": "race",

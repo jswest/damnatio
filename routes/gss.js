@@ -8,7 +8,8 @@ var names = {
 	"party": "Political Party (Condensed) [#Politics #Core]",
 	"politics": "Liberalism-Conservatism (Condensed) [#Politics #Core]",
 	"deathPenalty": "Death Penalty for Murderers [#Govt]",
-	"race": "Race (Original) [#Demographic #Race]"
+	"race": "Race (Original) [#Demographic #Race]",
+	"religion": "Religious Preference (Condensed) [#Relig #Demographic #Core]"
 };
 
 
