@@ -6,7 +6,9 @@
 	"dependencies": {
 		"csv": "0.3.x",
 		"express": "3.4.x",
-		"jade": "0.35.x"
+		"jade": "0.35.x",
+    "cheerio": "0.10.8",
+    "underscore": "1.4.4"
 	},
   "devDependencies": {
     "grunt": "^0.4.x",
