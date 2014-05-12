@@ -24,31 +24,9 @@ util.inherits(dab.data.producers.Espy, cau.framework.Producer);
 
 
 /**
- * Start year for the data set.
- */
-dab.data.producers.Espy.START_YEAR = 1608;
-
-
-/**
- * Start year for the data set.
- */
-dab.data.producers.Espy.END_YEAR = 2002;
-
-
-/**
  * The basic schema for this data.
  */
 dab.data.producers.Espy.SCHEMA = {
-
-  years: function() {
-    var START_YEAR = dab.data.producers.Espy.START_YEAR;
-    var END_YEAR = dab.data.producers.Espy.END_YEAR;
-    var years = [];
-    for (var year = START_YEAR; year <= END_YEAR; year++) {
-      years.push(year);
-    }
-    return years;
-  },
 
   method: [
     "Hanging",
@@ -73,6 +51,10 @@ dab.data.producers.Espy.SCHEMA = {
     "Asian-Pacific Il",
     "Other"
   ],
+
+  start_year: 1608,
+
+  end_year: 2002
 }
 
 
@@ -81,10 +63,11 @@ dab.data.producers.Espy.SCHEMA = {
  */
 dab.data.producers.Espy.prototype.get = function() {
   var segment = this.segment_;
+  var SCHEMA = dab.data.producers.Espy.SCHEMA;
 
   var emptyYear = {}
   // Fill out each year to include each possible value of the segment.
-  _.each(dab.data.producers.Espy.SCHEMA[segment], function(value) {
+  _.each(SCHEMA[segment], function(value) {
     emptyYear[value] = emptyYear[value] || 0;
   });
 
@@ -110,7 +93,9 @@ dab.data.producers.Espy.prototype.get = function() {
 
   // Fill in the missing years.
   countedSegments = dab.data.producers.Helper.fillInYears(
-      countedSegments, dab.data.producers.Espy.SCHEMA.years(), emptyYear);
+      countedSegments,
+      dab.data.producers.Helper.years(SCHEMA.start_year, SCHEMA.end_year),
+      emptyYear);
 
   return countedSegments;
 };

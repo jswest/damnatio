@@ -44,3 +44,12 @@ dab.data.producers.Helper.fillInYears = function(data, years, emptyYear) {
 
   return newData;
 };
+
+
+dab.data.producers.Helper.years = function(start_year, end_year) {
+  var years = [];
+  for (var year = start_year; year <= end_year; year++) {
+    years.push(year);
+  }
+  return years;
+};

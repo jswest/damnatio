@@ -22,18 +22,6 @@ util.inherits(dab.data.producers.Gss, cau.framework.Producer);
 
 
 /**
- * Start year for the data set.
- */
-dab.data.producers.Gss.START_YEAR = 1974;
-
-
-/**
- * Start year for the data set.
- */
-dab.data.producers.Gss.END_YEAR = 2012;
-
-
-/**
  * The basic schema for this data.
  */
 dab.data.producers.Gss.SCHEMA = {
@@ -55,16 +43,8 @@ dab.data.producers.Gss.SCHEMA = {
     UNSURE: 'Don\'t Know'
   },
 
-  // TODO: this should be shared somewhere.
-  years: function() {
-    var START_YEAR = dab.data.producers.Gss.START_YEAR;
-    var END_YEAR = dab.data.producers.Gss.END_YEAR;
-    var years = [];
-    for (var year = START_YEAR; year <= END_YEAR; year++) {
-      years.push(year);
-    }
-    return years;
-  },
+  start_year: 1974,
+  end_year: 2012,
 };
 
 
