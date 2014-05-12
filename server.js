@@ -5,7 +5,7 @@ var express    = require( 'express' )
 
 var section    = require( './app/routes/section' );
 require( './app/data/server' );
-dataServer = new dab.data.Server();
+var dataServer = new dab.data.Server();
 
 // Configure the app.
 app.configure( function () {

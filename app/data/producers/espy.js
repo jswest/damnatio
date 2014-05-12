@@ -50,12 +50,29 @@ dab.data.producers.Espy.SCHEMA = {
     return years;
   },
 
-  method: ["Hanging", "Shot", "Electrocution", "Asphyxiation-Gas",
-      "Injection", "Burned", "undefined", "Other", "Break on Wheel", "Hung in Chains",
-      "Pressing", "Bludgeoned", "Gibbetted"],
+  method: [
+    "Hanging",
+    "Shot",
+    "Electrocution",
+    "Asphyxiation-Gas",
+    "Injection",
+    "Burned",
+    "Other",
+    "Break on Wheel",
+    "Hung in Chains",
+    "Pressing",
+    "Bludgeoned",
+    "Gibbetted"
+  ],
 
-  race: ["White", "Black", "Native American", "Hispanic", "Asian-Pacific Il",
-      "Other"],
+  race: [
+    "White",
+    "Black",
+    "Native American",
+    "Hispanic",
+    "Asian-Pacific Il",
+    "Other"
+  ],
 }
 
 
