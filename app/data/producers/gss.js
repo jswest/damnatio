@@ -89,9 +89,9 @@ dab.data.producers.Gss.prototype.get = function() {
 
     return {
       year: year.year,
-      favorAverage: Math.round( (numFavor / total) * 100),
-      opposeAverage: Math.round( (numOppose / total) * 100),
-      unsureAverage: Math.round( (numUnsure / total) * 100),
+      favorPercentage: Math.round( (numFavor / total) * 100),
+      opposePercentage: Math.round( (numOppose / total) * 100),
+      unsurePercentage: Math.round( (numUnsure / total) * 100),
     }
   });
 

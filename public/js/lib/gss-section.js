@@ -5,83 +5,83 @@ DAB.GSSSection = function ( settings ) {
   var dummyData = [
     {
       "year": "1974-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "1976-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "1978-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "1980-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "1982-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "1984-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "1986-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "1988-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "1990-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "1993-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "1994-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "1996-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "1998-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "2000-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "2002-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "2004-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "2006-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "2008-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "2010-01-01",
-      "favor": 0
+      "favorPercentage": 0
     },
     {
       "year": "2012-01-01",
-      "favor": 0
+      "favorPercentage": 0
     }
   ];
 
@@ -170,7 +170,7 @@ DAB.GSSSection = function ( settings ) {
         return xScale( new Date( d.year ) );
       })
       .y( function ( d ) {
-        return yScale( d.favor );
+        return yScale( d.favorPercentage );
       })
       .interpolate( 'linear' );
     path = svg.append( 'path' )
