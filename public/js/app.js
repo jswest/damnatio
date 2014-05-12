@@ -133,14 +133,14 @@ $(document).ready( function () {
 
 	DAB.sections[7] = new DAB.EspySection({
 		"el": $('#espy-method-section'),
-		"url": "/espy",
+		"url": "/_/garbage?key=espy",
 		"segment": "method",
 		"animationDuration": 1000
 	});
 
 	DAB.sections[8] = new DAB.EspySection({
 		"el": $('#espy-race-section'),
-		"url": "/espy",
+		"url": "/_/othergarbage?key=espy",
 		"segment": "race",
 		"animationDuration": 1000
 	});

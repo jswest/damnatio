@@ -88,14 +88,14 @@ DAB.GSSSection = function ( settings ) {
   var buildMenu = function () {
     settings.el.append( '<ul class="menu clicked"><li class="control">' + settings.menuNicename + '</li></ul>' );
     var menu = settings.el.find( '.menu' );
-    var noSegmentString = 
+    var noSegmentString =
       '<li data-index="0" class="selected" data-segment-slug="all" data-segment="all">' +
         '<div class="colorblock" style="background-color:' + colorScale( 0 ) + '"></div>' +
         '<div class="name">All</div>' +
       '</li>'
     menu.append( noSegmentString );
     for ( var i = 0; i < settings.segments.length; i++ ) {
-      var segmentString = 
+      var segmentString =
         '<li data-index="' + ( i + 1 ) + '" data-segment-slug="' + settings.segmentSlugs[i] + '" data-segment="' + settings.segments[i] + '">' +
           '<div class="colorblock" style="background-color:' + colorScale( i + 1 ) + '"></div>' +
           '<div class="name">' + settings.segments[i] + '</div>'
@@ -114,11 +114,11 @@ DAB.GSSSection = function ( settings ) {
         if ( li.hasClass( 'selected' ) ) {
           that.updateLine( li.data( 'segment-slug'), li.data( 'index' ), dummyData );
         } else {
-          d3.json( '/support?facet=' + settings.name + '&segment=' + li.data( 'segment' ), function ( data ) {
+          d3.json( '/_/random?key=gss&facet=' + settings.name + '&segment=' + li.data( 'segment' ), function ( data ) {
             that.updateLine( li.data( 'segment-slug' ), li.data( 'index' ), data );
           } );
         }
-        li.toggleClass( 'selected' );   
+        li.toggleClass( 'selected' );
       }
     });
   };
@@ -136,7 +136,7 @@ DAB.GSSSection = function ( settings ) {
   var svg = d3.select( '#' + settings.elName )
     .append( 'svg' )
     .attr( 'width', ww )
-    .attr( 'height', wh ); 
+    .attr( 'height', wh );
   var xScale = d3.time.scale()
     .domain( [ new Date( '1974-01-01' ), new Date( '2012-01-01' ) ] )
     .range( [ padding.left, ww - padding.left - padding.right ] );
@@ -196,7 +196,7 @@ DAB.GSSSection = function ( settings ) {
       that.createLine( settings.segmentSlugs[i], i + 1 );
     }
     // update the first line.
-    d3.json( '/support?facet=all', function ( data ) {
+    d3.json( '/_/thisdoesntmatter?key=gss&facet=all', function ( data ) {
       that.updateLine( 'all', 0, data );
     });
   };

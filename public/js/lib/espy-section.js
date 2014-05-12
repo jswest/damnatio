@@ -104,7 +104,7 @@ DAB.EspySection = function ( settings ) {
 
       // append the inspector with the label
       settings.el.append(
-        '<div class="inspector">' + 
+        '<div class="inspector">' +
           datum[settings.segment] +
         '</div>'
       );
@@ -162,7 +162,7 @@ DAB.EspySection = function ( settings ) {
   };
 
   this.on = function () {
-    d3.json( settings.url + '?segment=' + settings.segment, function ( data ) {
+    d3.json( settings.url + '&segment=' + settings.segment, function ( data ) {
       createGraph( beginStackingData( data, settings.segment ) );
     });
   };
