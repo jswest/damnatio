@@ -35,10 +35,10 @@ util.provide = function(namespace) {
  * Takes a class or namespace, finds the file it is located in (according to the
  * file manifest) and requires that file.
  */
- // TODO think about how this affects the dev cycle.
 util.require = function(className) {
   if (!FILE_MANIFEST[className]) {
-    throw new Error('Class ' + className + ' not found. Regenerate the manifest?');
+    throw new Error(
+        'Class ' + className + ' not found. Regenerate the manifest?');
   }
 
   return require(FILE_MANIFEST[className]);
