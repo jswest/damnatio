@@ -3,8 +3,8 @@
  */
 
 require('../../../util.js');
-var assert = require('assert');
 util.require('cau.framework.Producer');
+util.require('dab.data.producers.Helper');
 
 util.provide('dab.data.producers.Espy');
 
@@ -112,45 +112,8 @@ dab.data.producers.Espy.prototype.get = function() {
   });
 
   // Fill in the missing years.
-  countedSegments = dab.data.producers.Espy.fillInYears(
+  countedSegments = dab.data.producers.Helper.fillInYears(
       countedSegments, dab.data.producers.Espy.SCHEMA.years(), emptyYear);
 
   return countedSegments;
-};
-
-
-/**
- * Takes an array of data each with a year property, a list of years, and an
- * empty year object and ensures that the list includes a datum for each year.
- * Returns a new list, sorted by year.
- *
- * Note: the array of data must be sorted by year to begin with, otherwise this
- * will throw.
- */
-// TODO move this somewhere shared?
-dab.data.producers.Espy.fillInYears = function(data, years, emptyYear) {
-  var newData = [];
-  var currentIndex = 0;
-  _.each(years, function(year) {
-    var currentDatum = data[currentIndex];
-    var currentYear = parseInt(currentDatum.year, 10);
-
-    // If the next datum has a later year, fill in a blank year. O.w. add the
-    // existing datum.
-    if (currentYear > year) {
-      newDatum = _.clone(emptyYear);
-      newDatum.year = year.toString();
-      newData.push(newDatum);
-    } else {
-      // In this case currentYear should always be the same as year. Otherwise
-      // the list was not sorted to begin with.
-      assert(
-          currentYear === year,
-          "Your data must be sorted by year to call fillInYears");
-      newData.push(currentDatum);
-      currentIndex++;
-    }
-  });
-
-  return newData;
 };

@@ -19,6 +19,7 @@
 var FILE_MANIFEST = {
 './app/data/producers/espy.js': 'dab.data.producers.Espy',
 './app/data/producers/gss.js': 'dab.data.producers.Gss',
+'./app/data/producers/helper.js': 'dab.data.producers.Helper',
 './app/data/registry.js': 'dab.data.Registry',
 './app/data/server.js': 'dab.data.Server',
 './app/data/store.js': 'dab.data.Store',
