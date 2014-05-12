@@ -82,6 +82,12 @@ dab.data.producers.Espy.SCHEMA = {
 dab.data.producers.Espy.prototype.get = function() {
   var segment = this.segment_;
 
+  var emptyYear = {}
+  // Fill out each year to include each possible value of the segment.
+  _.each(dab.data.producers.Espy.SCHEMA[segment], function(value) {
+    emptyYear[value] = emptyYear[value] || 0;
+  });
+
   var groupedByYear = _.groupBy(this.data_, function(value) {
     return value.year;
   });
@@ -94,21 +100,12 @@ dab.data.producers.Espy.prototype.get = function() {
     // Fill out each year to include each possible value of the segment.
     // TODO: This shouldn't need to be. The client should assume that any
     // undefined field is 0.
-    _.each(dab.data.producers.Espy.SCHEMA[segment], function(value) {
-      countedYear[value] = countedYear[value] || 0;
-    });
+    countedYear = _.extend(_.clone(emptyYear), countedYear);
 
     // Store the year on the new datum, since it was previously just the key.
     countedYear.year = key;
 
     return countedYear;
-  });
-
-  // TODO: dry this out.
-  var emptyYear = {}
-  // Fill out each year to include each possible value of the segment.
-  _.each(dab.data.producers.Espy.SCHEMA[segment], function(value) {
-    emptyYear[value] = emptyYear[value] || 0;
   });
 
   // Fill in the missing years.
