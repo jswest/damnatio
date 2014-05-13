@@ -4,6 +4,10 @@
  */
 
 
+// TODO: This is symlinked to from public. This is a dirrty hack and should be
+// killed with fire. That should go when we write a grunt to task to build the
+// client code.
+
 // Intentional globals.
 _ = require('./lib/underscore.js'); // This doesn't belong here.
 util = {};
@@ -42,7 +46,7 @@ util.require = function(className) {
   }
 
   return require(FILE_MANIFEST[className]);
-}
+};
 
 
 /**
@@ -64,7 +68,7 @@ util.inherits = function(subClass, superClass) {
     var args = Array.prototype.slice.call(arguments, 2);
     return superClass.prototype[methodName].apply(me, args);
   };
-}
+};
 
 
 /**
@@ -76,7 +80,7 @@ util.abstractMethod = function(opt_methodName) {
   return function() {
     throw new Error(methodName + " not yet implemented.");
   }
-}
+};
 
 
 /**
@@ -85,6 +89,17 @@ util.abstractMethod = function(opt_methodName) {
  */
 util.createInstance = function(constructor) {
   return new constructor();
-}
+};
+
+
+/**
+ * Turns underscores into spaces, capitalizes all words.
+ */
+util.titleize = function(string) {
+  string = string.replace(/_/g, ' ');
+  return _.map(string.split(' '), function(word) {
+    return word[0].toUpperCase() + word.slice(1);
+  }).join(' ');
+};
 
 module.exports = util;
