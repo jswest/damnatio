@@ -102,4 +102,13 @@ util.titleize = function(string) {
   }).join(' ');
 };
 
+
+/**
+ * Asserts that the parameter is truthy.
+ */
+util.assert = function(obj, opt_message) {
+  var message = opt_message || obj + " is not truthy";
+  return obj || throw new Error(message);
+};
+
 module.exports = util;
