@@ -4,7 +4,8 @@ util.provide('DAB.sections.GraphSection');
  * A section that contains a graph.
  */
 DAB.sections.GraphSection = function (options) {
-  this.base(this, 'constructor', options);
+  options = options || {};
+  DAB.sections.GraphSection.base(this, 'constructor', options);
   this.graph_ = this.createGraph();
 };
 util.inherits(DAB.sections.GraphSection, DAB.Section);
@@ -37,7 +38,7 @@ DAB.sections.GraphSection.prototype.onDataLoad = function (data) {
  * @override
  */
 DAB.sections.GraphSection.prototype.getDataKey = function () {
-  this.graph_.getDataKey();
+  return this.graph_.getDataKey();
 };
 
 

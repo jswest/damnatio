@@ -52,9 +52,11 @@ DAB.Graph = function (options) {
  * be done here. Data will not be available here.
  */
 DAB.Graph.prototype.render = function (opt_element) {
-  this.element_ = opt_element ||
-      this.element_ ||
-      throw new Error('You must specify an element to render a Graph.');
+  this.element_ = opt_element || this.element_;
+
+  if (!this.element_) {
+    throw new Error('You must specify an element to render a Graph.');
+  }
 
   this.renderSvg_();
   this.renderAxes_();
@@ -178,9 +180,11 @@ DAB.Graph.prototype.initializeYScale_ = function () {
 // TODO: consider delaying this until the data is loaded and trying to determine
 // what to do from the data (probably hard).
 DAB.Graph.prototype.getXDomain_ = function () {
-  return this.xDomain_ ||
-      throw new Error('You must either override Graph.getXDomain or pass in an
-                       xDomain in the settings object.');
+  if (!this.xDomain_) {
+    throw new Error('You must either override Graph.getXDomain or pass in an xDomain in the settings object.');
+  }
+
+  return this.xDomain_;
 };
 
 
@@ -188,9 +192,11 @@ DAB.Graph.prototype.getXDomain_ = function () {
  * Gets the y scale domain.
  */
 DAB.Graph.prototype.getYDomain_ = function () {
-  return this.yDomain_ ||
-      throw new Error('You must either override Graph.getYDomain or pass in an
-                       yDomain in the settings object.');
+  if (!this.yDomain_) {
+    throw new Error('You must either override Graph.getYDomain or pass in an yDomain in the settings object.');
+  }
+
+  return this.yDomain_;
 };
 
 

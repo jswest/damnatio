@@ -11,7 +11,7 @@ util.provide('DAB.SectionRegistry');
 DAB.SectionRegistry = function (dataService) {
   this.sections_ = [];
   this.sectionIndex_ = 0;
-  this.dataService = dataService;
+  this.dataService_ = dataService;
 };
 
 
@@ -31,7 +31,7 @@ DAB.SectionRegistry.prototype.registerSection = function (element, section) {
     section       : section,
     hasLoadedData : false,
     index         : this.sectionIndex_,
-    dataKey       : section.getDataKey();
+    dataKey       : section.getDataKey()
   };
   this.sectionIndex_++;
 
@@ -53,8 +53,12 @@ DAB.SectionRegistry.prototype.handleScroll = _.debounce(function () {
         position < 0 && position > -DAB.SectionRegistry.SCROLL_DATA_RADIUS;
   });
 
+  debugger;
+
   // TODO: Handle unloading sections that are no longer needed.
-  this.dataService_.loadKeys(_.pluck('dataKey'), _.bind(this.dataLoaded), this);
+  this.dataService_.loadKeys(
+      _.pluck(this.sections_, 'dataKey'),
+      _.bind(this.dataLoaded, this));
 });
 
 
@@ -62,6 +66,6 @@ DAB.SectionRegistry.prototype.handleScroll = _.debounce(function () {
  * Callback for returned data.
  */
 DAB.SectionRegistry.prototype.dataLoaded = function (key, data) {
-  var section = _.findWhere(this.sections_, {dataKey: key});
+  var section = _.findWhere(this.sections_, {dataKey: key}).section;
   section.onDataLoad(data);
 };

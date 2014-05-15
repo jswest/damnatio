@@ -3,7 +3,7 @@
  * data from the server is necessary to load that content. Sections can contain
  * graphs, text, and images.
  */
- util.provide('DAB.Section');
+util.provide('DAB.Section');
 
 
 

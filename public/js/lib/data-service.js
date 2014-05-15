@@ -21,9 +21,9 @@ DAB.DataService.prototype.loadKeys = function (keys, callback) {
       return callback(value, this.cache_[value]);
     }
 
-    d3.json( '/_/getridofthis?key=' + value, function (data) {
+    d3.json( '/_/getridofthis?key=' + value, _.bind(function (data) {
       this.cache_[value] = data;
       callback(value, data);
-    });
+    }, this));
   }, this);
 };

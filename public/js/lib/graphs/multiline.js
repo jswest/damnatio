@@ -2,16 +2,17 @@
  * Represents a graph that has multiple lines that can be graphed in parallel
  * controlled by a simple menu.
  */
-util.provide('DAB.graph.Multiline');
+util.provide('DAB.graphs.Multiline');
 
 
 
 /**
  *
  */
-DAB.graph.Multiline = function (options) {
+DAB.graphs.Multiline = function (options) {
+  options = options || {};
   // Super constructor does all the work.
-  this.base(this, 'constructor', options);
+  DAB.graphs.Multiline.base(this, 'constructor', options);
 
   this.menuNicename_  = options.menuNicename;
   this.colorScale_    = options.colorScale_ || d3.scale.category20();
@@ -20,13 +21,13 @@ DAB.graph.Multiline = function (options) {
   this.line_          = null;
   this.initializeLine_();
 };
-util.inherits(DAB.graph.Multiline, DAB.Graph);
+util.inherits(DAB.graphs.Multiline, DAB.Graph);
 
 
 /**
  * Render the graph.
  */
-DAB.graph.Multiline.prototype.renderData = function () {
+DAB.graphs.Multiline.prototype.renderData = function () {
   this.renderMenu_();
   this.bindMenu_();
   this.initializeDummyData_();
@@ -43,7 +44,7 @@ DAB.graph.Multiline.prototype.renderData = function () {
 /**
  * Render the menu. To be called only after the data has been loaded.
  */
-DAB.graph.Multiline.prototype.renderMenu_ = function () {
+DAB.graphs.Multiline.prototype.renderMenu_ = function () {
   this.element_.append('<ul class="menu clicked"><li class="control">' + this.menuNicename_ + '</li></ul>');
   var menu = this.element_.find('.menu');
   var itemNames = _.keys(this.data_);
@@ -56,7 +57,7 @@ DAB.graph.Multiline.prototype.renderMenu_ = function () {
 /**
  * Bind the menu events. To be called only after the menu has been rendered.
  */
-DAB.graph.Multiline.prototype.bindMenu_ = function () {
+DAB.graphs.Multiline.prototype.bindMenu_ = function () {
   var menu = this.element_.find('.menu');
   var that = this;
   var menuItemIndex = 0;
@@ -81,7 +82,7 @@ DAB.graph.Multiline.prototype.bindMenu_ = function () {
 /**
  * Menu list item template.
  */
-DAB.graph.Multiline.prototype.menuItem_ = function (name, index) {
+DAB.graphs.Multiline.prototype.menuItem_ = function (name, index) {
   return '<li class="menu-item" data-slug=' + name + '>' +
     '<div class="colorblock" style="background-color:' + this.colorScale_( index ) + '"></div>' +
     '<div class="name">' + util.titleize(name) + '</div>'
@@ -92,7 +93,7 @@ DAB.graph.Multiline.prototype.menuItem_ = function (name, index) {
 /**
  * Create the path with the given slug.
  */
-DAB.graph.Multiline.prototype.createPath_ = function (slug, id, data) {
+DAB.graphs.Multiline.prototype.createPath_ = function (slug, id, data) {
   this.svg_.append('path')
       .attr('stroke', this.colorScale_(id))
       .attr('class', 'line ' + slug)
@@ -103,7 +104,7 @@ DAB.graph.Multiline.prototype.createPath_ = function (slug, id, data) {
 /**
  * Update the path with the given slug to match the given data.
  */
-DAB.graph.Multiline.prototype.updatePath_ = function (slug, id, data) {
+DAB.graphs.Multiline.prototype.updatePath_ = function (slug, id, data) {
   this.svg_.select('.' + slug)
     .transition()
     .duration(800)
@@ -115,7 +116,7 @@ DAB.graph.Multiline.prototype.updatePath_ = function (slug, id, data) {
 /**
  * The basic D3 line object.
  */
-DAB.graph.Multiline.prototype.initializeLine_ = function() {
+DAB.graphs.Multiline.prototype.initializeLine_ = function() {
   this.line_ = d3.svg.line()
     .x(_.bind(function (d) {
       return this.xScale_(new Date(d.year));
@@ -131,7 +132,7 @@ DAB.graph.Multiline.prototype.initializeLine_ = function() {
  * Given an array of data, produces a similarly shaped, zeroed-out array of
  * dummy data.
  */
-DAB.graph.Multiline.initializeDummyData_ = function (data) {
+DAB.graphs.Multiline.initializeDummyData_ = function (data) {
   var rangeLength = this.getXRange_()[1] - this.getXRange_()[0];
   // Create a dummy point evenly spaced for each data point.
   this.dummyData_ = _.map(data, function(value, index) {
