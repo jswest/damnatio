@@ -29,6 +29,7 @@ DAB.Graph = function (options) {
     bottom : 100,
     left   : 100
   };
+  this.dataKey_ = options.dataKey;
   this.element_ = options.element;
   this.xDomain_ = options.xDomain;
   this.yDomain_ = options.yDomain;
@@ -82,7 +83,9 @@ DAB.Graph.prototype.renderData = util.abstractMethod('Graph#renderData');
 /**
  * Return the data key that corresponds with this graph.
  */
-DAB.Graph.prototype.getDataKey = util.abstractMethod('Graph#getDataKey');
+DAB.Graph.prototype.getDataKey = function () {
+  return this.dataKey_;
+};
 
 
 /**

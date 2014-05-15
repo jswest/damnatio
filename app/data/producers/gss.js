@@ -15,8 +15,7 @@ util.provide('dab.data.producers.Gss');
 dab.data.producers.Gss = function(req, dataStore) {
   dab.data.producers.Gss.base(this, 'constructor', req, dataStore);
   this.data_ = this.dataStore_.getGssData();
-  this.segment_ = req.query.segment;
-  this.facet_ = req.query.facet;
+  this.groupByField_ = 'race';
 };
 util.inherits(dab.data.producers.Gss, cau.framework.Producer);
 
