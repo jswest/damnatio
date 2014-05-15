@@ -40,6 +40,16 @@ DAB.SectionRegistry.prototype.registerSection = function (element, section) {
 
 
 /**
+ * Render the skeleton of each section without data.
+ */
+DAB.SectionRegistry.prototype.renderSections = function () {
+  _.each(this.sections_, function (section) {
+    section.section.render();
+  });
+};
+
+
+/**
  * Handles scroll events. Checks to see what sections are near the current
  * scroll position and ensures that data is loaded for all of those. Unloads any
  * sections that are far from the current scroll position.
@@ -52,8 +62,6 @@ DAB.SectionRegistry.prototype.handleScroll = _.debounce(function () {
     return position >= 0 && position < DAB.SectionRegistry.SCROLL_DATA_RADIUS ||
         position < 0 && position > -DAB.SectionRegistry.SCROLL_DATA_RADIUS;
   });
-
-  debugger;
 
   // TODO: Handle unloading sections that are no longer needed.
   this.dataService_.loadKeys(

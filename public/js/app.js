@@ -5,7 +5,10 @@ $(document).ready( function () {
 
 	sectionRegistry.registerSection(
 			$('#gss-sex-section'),
-			new DAB.sections.GssRaceSection());
+			new DAB.sections.GssRaceSection({ element: $('#gss-sex-section') }));
+
+	// Render the skeletons.
+	sectionRegistry.renderSections();
 
 	DAB.router = new DAB.Router();
 	Backbone.history.start({

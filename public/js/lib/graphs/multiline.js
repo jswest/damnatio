@@ -48,9 +48,9 @@ DAB.graphs.Multiline.prototype.renderMenu_ = function () {
   this.element_.append('<ul class="menu clicked"><li class="control">' + this.menuNicename_ + '</li></ul>');
   var menu = this.element_.find('.menu');
   var itemNames = _.keys(this.data_);
-  _.each(itemNames, function (itemName, index) {
+  _.each(itemNames, _.bind(function (itemName, index) {
     menu.append(this.menuItem_(itemName, index));
-  });
+  }, this));
 };
 
 
@@ -132,12 +132,12 @@ DAB.graphs.Multiline.prototype.initializeLine_ = function() {
  * Given an array of data, produces a similarly shaped, zeroed-out array of
  * dummy data.
  */
-DAB.graphs.Multiline.initializeDummyData_ = function (data) {
+DAB.graphs.Multiline.prototype.initializeDummyData_ = function (data) {
   var rangeLength = this.getXRange_()[1] - this.getXRange_()[0];
   // Create a dummy point evenly spaced for each data point.
   this.dummyData_ = _.map(data, function(value, index) {
     return {
-      x: this.xScale_.inverse(index / rangeLength),
+      year: this.xScale_.inverse(index / rangeLength),
       y: 0
     }
   }, this);

@@ -97,7 +97,7 @@ DAB.Graph.prototype.setElement = function (element) {
  * @protected
  */
 DAB.Graph.prototype.renderSvg_ = function () {
-  this.svg_ = d3.select(this.element_)
+  this.svg_ = d3.select(this.element_.get(0))
       .append('svg')
       .attr('width', this.width_)
       .attr('height', this.height_);
@@ -126,7 +126,7 @@ DAB.Graph.prototype.renderAxes_ = function () {
  */
 DAB.Graph.prototype.initializeXAxis_ = function () {
   if (!this.xScale_) {
-    this.initializeXScale_;
+    this.initializeXScale_();
   }
 
   this.xAxis_ = d3.svg.axis()
@@ -143,7 +143,7 @@ DAB.Graph.prototype.initializeYAxis_ = function () {
   var padding = this.padding_;
 
   if (!this.yScale_) {
-    this.initializeYScale_;
+    this.initializeYScale_();
   }
 
   this.yAxis_ = d3.svg.axis()
