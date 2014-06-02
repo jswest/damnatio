@@ -7,7 +7,7 @@ DAB.Router = Backbone.Router.extend({
 	},
 
 	home: function () {
-    DAB.sections[0].on();
+
 	},
 
   section: function ( id, slug ) {

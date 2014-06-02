@@ -22,6 +22,7 @@ app.configure( function () {
 app.get( '/', section.home );
 // TODO figure out why param capturing isn't working
 app.get( '/_/:key', _.bind(dataServer.get, dataServer) );
+app.get( '/:id/:slug', section.home );
 
 
 // Start yer engines.
