@@ -9,7 +9,6 @@ util.provide('DAB.graphs.FauxStackedBar');
 DAB.graphs.FauxStackedBar = function (options) {
   options = options || {};
   // Super constructor does all the work.
-  // TODO: help @jswest understand what the fuck is happening here.
   DAB.graphs.FauxStackedBar.base(this, 'constructor', options);
 
   this.segments_ = options.segments;
@@ -19,19 +18,15 @@ DAB.graphs.FauxStackedBar = function (options) {
   }
   this.colorScale_     = options.colorScale_ || d3.scale.category20();
   this.initialSegment_ = options.initialSegment || options.segments[0];
+  this.durations_      = options.durations_ || { "flatten": 500, "reorder": 100, "leaven": 500 };
   this.currentSegment_ = this.initialSegment_;
-  this.data_           = null;
 };
+util.inherits(DAB.graphs.FauxStackedBar, DAB.Graph);
 
 
 DAB.graphs.FauxStackedBar.prototype.sortDataByCurrentSegment_ = function () {
   this.data_ = this.data_.sort(function (a, b) {
-    if ( a[this.currentSegment_.name] > b[this.currentSegment_.name] ) {
-      return 1;
-    }
-    else {
-      return -1;
-    }
+    return (a[this.currentSegment_.name] > b[this.currentSegment_.name] ? 1 : -1);
   });
 };
 
@@ -39,7 +34,7 @@ DAB.graphs.FauxStackedBar.prototype.sortDataByCurrentSegment_ = function () {
 DAB.graphs.FauxStackedBar.prototype.renderControls_ = function () {
   this.element_.append(
     '<ul class="controls">' +
-      '<li>' + this.initialSegment_.nicename + '</li>'
+      '<li>' + this.initialSegment_.nicename + '</li>' +
     '</ul>'
   );
   var controls = this.element_.find('.controls');
@@ -47,23 +42,13 @@ DAB.graphs.FauxStackedBar.prototype.renderControls_ = function () {
   // iterate over the segments, and add each one to the controls menu.
   for (var i = 0; i < this.segments_.length; i++) {
     var segment = this.segments_[i];
-    // okay, this is a little ugly.
-    // check if this is the current segment and add a class
-    // to that <li> so that we can style it differently.
-    if ( segment.name === this.initialSegment_.name ) {
-      controls.append(
-        '<li class="control current-segment" data-segment="' + segment.name + '">' +
-          segment.nicename +
-        '</li>'
-      );      
-    }
-    else {
-      controls.append(
-        '<li class="control" data-segment="' + segment.name + '">' +
-          segment.nicename +
-        '</li>'
-      );
-    }
+    var sharedClass = 'control';
+    var classes = segment.name === this.initialSement_.name ? sharedClass + ' current-segment' : sharedClass;
+    controls.append(
+      '<li class="' + classes + '" data-segment="' + segment.name + '">' +
+        segment.nicename +
+      '</li>'
+    );
   }
 };
 
@@ -93,16 +78,13 @@ DAB.graphs.FauxStackedBar.prototype.renderKey_ = function () {
     var value = this.currentSegment_.values[i];
     interactiveKey.append(
       '<dl class="key-color-block" style="' + this.colorScale(i) + '"></dl>' +
-      '<dt class="key-value-name">' + value + '</dt>';
+      '<dt class="key-value-name">' + value + '</dt>'
     );
   }
 };
 
-DAB.graphs.FauxStackedBar.prototype.getYear_ = function () {
-  // assuming the date comes in as mm/dd/year, which it is right now,
-  // but it could come in as yyyy-mm-dd, which I would prefer.
-  // let's talk about this function when we figure out how to format the data.
-  return new Date(date.split('/')[2]);
+DAB.graphs.FauxStackedBar.prototype.getYear_ = function (date) {
+  return new Date((new Date(date)).getFullYear());
 };
 
 DAB.graphs.FauxStackedBar.prototype.initializeRects_ = function () {
@@ -115,68 +97,52 @@ DAB.graphs.FauxStackedBar.prototype.initializeRects_ = function () {
     .attr('height', this.hScale(1) - 2)
 };
 
-DAB.graphs.FauxStackedBar.prototype.createGraph_ = function () {
-  var indices = {};
+DAB.graphs.FauxStackedBar.prototype.flattenGraph_ = function (needsTransition) {
+  var transitionDuration = needsTransition ? this.durations_.flatten : 0;
   this.rects
+    .transition()
+    .duration(transitionDuration)
     .attr('transform', function (d, i) {
       var xpos = this.xScale_(this.getYear(d.date));
-      var ypos = this.height_ - this.padding_.bottom; // start by having each column at the bottom.
-      return 'translate(' + xpos + ',' + ypos + ')'; 
+      var ypos = this.height_ - this.padding_.bottom;
+      return 'translate(' + xpos + ',' + ypos + ')';
     })
-    .style('fill', function (d, i) { return this.colorScale_(d[this.currentSegment_.name]) })
+};
+
+DAB.graphs.FauxStackedBar.prototype.colorGraph_ = function (needsTransition) {
+  var transitionDuration = needsTransition ? this.durations_.reorder : 0;
+  var transitionDelay    = needsTransition ? this.durations_.flatten : 0;
+  this.rects
     .transition()
-    .duration(500)
+    .delay(transitionDelay)
+    .duration(transitionDuration);
+};
+
+DAB.graphs.FauxStackedBar.prototype.buildGraph_ = function (needsDelay) {
+  var transitionDelay = needsDelay ? this.durations_.flatten + this.durations_.reorder : 0;
+  this.flattenGraph_(needsDelay);
+  this.colorGraph_(needsDelay);
+  var indices = {};
+  this.rects
+    .transition()
+    .delay(transitionDelay)
+    .duration(this.durations_.leaven)
     .attr('transform', function (d, i) {
       var date = this.getYear_(d.date);
-      if (indices[date]) {
-        indices[date]++;
-      }
-      else {
-        indices[date] = 1;
-      }
+      indices[date] = indices[date] || 0;
+      indices[date]++;
       var xpos = this.xScale_(date);
       var ypos = this.yScale_(indices[date]);
       return 'translate(' + xpos + ',' + ypos + ')';
     });
 };
 
-DAB.graphs.FauxStackedBar.prototype.updateGraph_ = function () {
-  this.rects
-    .transition()
-    .duration(500)
-    .attr('transform', function (d, i) {
-      var xpos = this.xScale_(this.getYear(d.date));
-      var ypos = this.height_ - this.padding_.bottom;
-      return 'translate(' + xpos + ',' + ypos + ')';     
-    })
-  this.sortDataByCurrentSegment_();
-  this.rects
-    .data(_this.data)
-    .transition()
-    .delay(500)
-    .duration(100)
-    .attr('transform', function (d, i) {
-      var xpos = this.xScale_(this.getYear(d.date));
-      var ypos = this.height_ - this.padding_.bottom;
-      return 'translate(' + xpos + ',' + ypos + ')';     
-    })
-    .style('fill', function (d, i) { return this.colorScale_(d[this.currentSegment_.name]) })
-    .transition()
-    .delay(600)
-    .duration(500)
-    .attr('transform', function (d, i) {
-      var date = this.getYear_(d.date);
-      if (indices[date]) {
-        indices[date]++;
-      }
-      else {
-        indices[date] = 1;
-      }
-      var xpos = this.xScale_(date);
-      var ypos = this.yScale_(indices[date]);
-      return 'translate(' + xpos + ',' + ypos + ')';      
-    });
+DAB.graphs.FauxStackedBar.prototype.createGraph_ = function () {
+  this.buildGraph_(false);
 };
+DAB.graphs.FauxStackedBar.prototype.updateGraph_ = function () {
+  this.buildGraph_(true);
+}
 
 // TODO add a handler for hover that shows the footer data about each execution
 // TODO add a handler for click that shows a model about that execution
