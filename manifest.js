@@ -17,6 +17,7 @@
  * find . -name "*.js" -print | xargs grep util.provide\( | sed s/:util.provide\(// | sed s:\./:\'\./: | sed s#\.js\'#\.js\':\ \'\# | sed s/\)\;/,/
  */
 var FILE_MANIFEST = {
+'./app/data/producers/dpic.js': 'dab.data.producers.Dpic',
 './app/data/producers/espy.js': 'dab.data.producers.Espy',
 './app/data/producers/gss.js': 'dab.data.producers.Gss',
 './app/data/producers/helper.js': 'dab.data.producers.Helper',
