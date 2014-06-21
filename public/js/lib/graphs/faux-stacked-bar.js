@@ -11,17 +11,15 @@ DAB.graphs.FauxStackedBar = function (options) {
   // Super constructor does all the work.
   DAB.graphs.FauxStackedBar.base(this, 'constructor', options);
 
-  this.segments_ = options.segments;
-  if (typeof this.segments_ !== 'array') {
-    throw new Error('You must pass in segments to the options object.');
-    return;
-  }
   this.colorScale_     = options.colorScale_ || d3.scale.category20();
-  this.initialSegment_ = options.initialSegment || options.segments[0];
+  this.initialSegment_ = options.initialSegment;
   this.durations_      = options.durations_ || { "flatten": 500, "reorder": 100, "leaven": 500 };
-  this.currentSegment_ = this.initialSegment_;
 };
 util.inherits(DAB.graphs.FauxStackedBar, DAB.Graph);
+
+
+// TODO sort out the data and render the graph.
+DAB.graphs.FauxStackedBar.prototype.renderData = function () { debugger; };
 
 
 DAB.graphs.FauxStackedBar.prototype.sortDataByCurrentSegment_ = function () {

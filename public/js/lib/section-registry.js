@@ -65,6 +65,7 @@ DAB.SectionRegistry.prototype.handleScroll = _.debounce(function () {
 
   // TODO: Handle unloading sections that are no longer needed.
   this.dataService_.loadKeys(
+    // TODO: actually handle the right sectionsToLoad, currently loading everything.
       _.pluck(this.sections_, 'dataKey'),
       _.bind(this.dataLoaded, this));
 });
