@@ -29,8 +29,9 @@ util.provide = function(namespace) {
   var currentObject = global || window;
   _.each(intermediateObjectNames, function(nextObject) {
     if (!_.isObject(currentObject[nextObject])) {
-      currentObject = currentObject[nextObject] = {};
+      currentObject[nextObject] = {};
     }
+    currentObject = currentObject[nextObject];
   });
 };
 
