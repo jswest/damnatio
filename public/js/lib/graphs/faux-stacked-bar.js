@@ -11,8 +11,15 @@ DAB.graphs.FauxStackedBar = function (options) {
   // Super constructor does all the work.
   DAB.graphs.FauxStackedBar.base(this, 'constructor', options);
 
+  this.schema_ = options.schema;
+  if (!_.isObject(this.schema_)) {
+    throw new Error('You must pass in a schema to FauxStackedBar.');
+  }
+  this.segments_ = _.keys(this.schema_);
+  this.initialSegment_ = options.initialSegment || this.segments_[0];
+  this.currentSegment_ = this.initialSegment_;
+
   this.colorScale_     = options.colorScale_ || d3.scale.category20();
-  this.initialSegment_ = options.initialSegment;
   this.durations_      = options.durations_ || { "flatten": 500, "reorder": 100, "leaven": 500 };
 };
 util.inherits(DAB.graphs.FauxStackedBar, DAB.Graph);
@@ -67,23 +74,29 @@ DAB.graphs.FauxStackedBar.prototype.bindControls_ = function () {
   });
 };
 
+
 DAB.graphs.FauxStackedBar.prototype.renderKey_ = function () {
   this.element_.append('<dl class="interactive-key"></dl>');
   var interactiveKey = this.element_.find('.interactive-key');
 
   // iterate over the current segment's values and add them and their color to the keys <dl>.
-  for (var i = 0; i < this.currentSegment_.values.length; i++) {
-    var value = this.currentSegment_.values[i];
+  _.each(this.schema_[this.currentSegment_].values, function (value, i) {
     interactiveKey.append(
-      '<dl class="key-color-block" style="' + this.colorScale(i) + '"></dl>' +
+      '<dl class="key-color-block" style="background-color:' + this.colorScale_(i) + '"></dl>' +
       '<dt class="key-value-name">' + value + '</dt>'
     );
-  }
+  }, this);
 };
 
+
+// TODO this should be shared somewhere
 DAB.graphs.FauxStackedBar.prototype.getYear_ = function (date) {
-  return new Date((new Date(date)).getFullYear());
+  // getFullYear returns a number, which Date interprets as milliseconds since
+  // beginning of epoch, so we cast it to a string and it is interpreted as a
+  // year.
+  return new Date("" + (new Date(date)).getFullYear());
 };
+
 
 DAB.graphs.FauxStackedBar.prototype.initializeRects_ = function () {
   this.sortDataByCurrentSegment_();
@@ -91,21 +104,23 @@ DAB.graphs.FauxStackedBar.prototype.initializeRects_ = function () {
     .data(this.data_)
     .enter()
     .append('rect')
-    .attr('width', this.xScale_(new Date(2014)) - this.xScale_(new Date(2013)))
-    .attr('height', this.hScale(1) - 2)
+    .attr('width', this.xScale_(new Date('2014')) - this.xScale_(new Date('2013')))
+    .attr('height', this.yScale_(0) - this.yScale_(1))
 };
+
 
 DAB.graphs.FauxStackedBar.prototype.flattenGraph_ = function (needsTransition) {
   var transitionDuration = needsTransition ? this.durations_.flatten : 0;
   this.rects
     .transition()
     .duration(transitionDuration)
-    .attr('transform', function (d, i) {
-      var xpos = this.xScale_(this.getYear(d.date));
+    .attr('transform', _.bind(function (d, i) {
+      var xpos = this.xScale_(this.getYear_(d.date));
       var ypos = this.height_ - this.padding_.bottom;
       return 'translate(' + xpos + ',' + ypos + ')';
-    })
+    }, this));
 };
+
 
 DAB.graphs.FauxStackedBar.prototype.colorGraph_ = function (needsTransition) {
   var transitionDuration = needsTransition ? this.durations_.reorder : 0;
@@ -113,8 +128,12 @@ DAB.graphs.FauxStackedBar.prototype.colorGraph_ = function (needsTransition) {
   this.rects
     .transition()
     .delay(transitionDelay)
-    .duration(transitionDuration);
+    .duration(transitionDuration)
+    .style('fill', _.bind(function (d, i) {
+      return this.colorScale_(_.indexOf(this.schema_[this.currentSegment_].values, d[this.currentSegment_]));
+    }, this));
 };
+
 
 DAB.graphs.FauxStackedBar.prototype.buildGraph_ = function (needsDelay) {
   var transitionDelay = needsDelay ? this.durations_.flatten + this.durations_.reorder : 0;
