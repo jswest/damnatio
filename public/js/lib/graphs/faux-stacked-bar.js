@@ -45,8 +45,16 @@ DAB.graphs.FauxStackedBar.prototype.render = function () {
 };
 
 
+/**
+ * Sort the data by the position of its value for the current segment in the
+ * schema's list of values.
+ */
 DAB.graphs.FauxStackedBar.prototype.sortDataByCurrentSegment_ = function () {
-  this.data_ = _.sortBy(this.data_, this.currentSegment_);
+  this.data_ = _.sortBy(this.data_, function(value) {
+    return _.indexOf(
+        this.schema_[this.currentSegment_].values,
+        value[this.currentSegment_]);
+  }, this);
 };
 
 
