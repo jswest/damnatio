@@ -46,9 +46,7 @@ DAB.graphs.FauxStackedBar.prototype.render = function () {
 
 
 DAB.graphs.FauxStackedBar.prototype.sortDataByCurrentSegment_ = function () {
-  this.data_ = this.data_.sort(function (a, b) {
-    return (a[this.currentSegment_.name] > b[this.currentSegment_.name] ? 1 : -1);
-  });
+  this.data_ = _.sortBy(this.data_, this.currentSegment_);
 };
 
 
