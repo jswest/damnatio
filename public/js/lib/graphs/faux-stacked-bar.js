@@ -51,24 +51,21 @@ DAB.graphs.FauxStackedBar.prototype.sortDataByCurrentSegment_ = function () {
 
 
 DAB.graphs.FauxStackedBar.prototype.renderControls_ = function () {
-  this.element_.append(
-    '<ul class="controls">' +
-      '<li>' + this.initialSegment_.nicename + '</li>' +
-    '</ul>'
-  );
+  this.element_.append('<ul class="controls"></ul>');
   var controls = this.element_.find('.controls');
+  var sharedClass = 'control';
 
   // iterate over the segments, and add each one to the controls menu.
-  for (var i = 0; i < this.segments_.length; i++) {
-    var segment = this.segments_[i];
-    var sharedClass = 'control';
-    var classes = segment.name === this.initialSement_.name ? sharedClass + ' current-segment' : sharedClass;
+  _.each(this.segments_, function (segment) {
+    var classes = this.schema_[segment].key === this.initialSegment_ ?
+        sharedClass + ' current-segment' :
+        sharedClass;
     controls.append(
-      '<li class="' + classes + '" data-segment="' + segment.name + '">' +
-        segment.nicename +
+      '<li class="' + classes + '" data-segment="' + segment + '">' +
+        util.titleize(segment) +
       '</li>'
     );
-  }
+  }, this);
 };
 
 
@@ -159,14 +156,14 @@ DAB.graphs.FauxStackedBar.prototype.buildGraph_ = function (needsDelay) {
     .transition()
     .delay(transitionDelay)
     .duration(this.durations_.leaven)
-    .attr('transform', function (d, i) {
+    .attr('transform', _.bind(function (d, i) {
       var date = this.getYear_(d.date);
       indices[date] = indices[date] || 0;
       indices[date]++;
       var xpos = this.xScale_(date);
       var ypos = this.yScale_(indices[date]);
       return 'translate(' + xpos + ',' + ypos + ')';
-    });
+    }, this));
 };
 
 
