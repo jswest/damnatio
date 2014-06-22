@@ -15,7 +15,7 @@ util.provide('dab.data.Store');
 dab.data.Store = function() {
   this.espyData_ = require('../../data/espy-full.json');
   this.gssData_ = require('../../data/gss-death-penalty.json');
-  this.dpicData_ = require('../../data/dpic-full.json');
+  this.dpicData_ = require('../../data/dpic.json');
 };
 util.inherits(dab.data.Store, cau.framework.Store);
 
