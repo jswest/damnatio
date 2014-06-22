@@ -25,8 +25,24 @@ DAB.graphs.FauxStackedBar = function (options) {
 util.inherits(DAB.graphs.FauxStackedBar, DAB.Graph);
 
 
-// TODO sort out the data and render the graph.
-DAB.graphs.FauxStackedBar.prototype.renderData = function () { debugger; };
+/**
+ * Called when the data is fully loaded.
+ */
+DAB.graphs.FauxStackedBar.prototype.renderData = function () {
+  this.createGraph_();
+  this.bindControls_();
+};
+
+
+/**
+ * Called when the containing section is rendered.
+ */
+DAB.graphs.FauxStackedBar.prototype.render = function () {
+  DAB.graphs.FauxStackedBar.base(this, 'render');
+
+  this.renderControls_();
+  this.renderKey_();
+};
 
 
 DAB.graphs.FauxStackedBar.prototype.sortDataByCurrentSegment_ = function () {
@@ -56,6 +72,7 @@ DAB.graphs.FauxStackedBar.prototype.renderControls_ = function () {
     );
   }
 };
+
 
 DAB.graphs.FauxStackedBar.prototype.bindControls_ = function () {
   var that = this;
@@ -154,9 +171,13 @@ DAB.graphs.FauxStackedBar.prototype.buildGraph_ = function (needsDelay) {
     });
 };
 
+
 DAB.graphs.FauxStackedBar.prototype.createGraph_ = function () {
+  this.initializeRects_();
   this.buildGraph_(false);
 };
+
+
 DAB.graphs.FauxStackedBar.prototype.updateGraph_ = function () {
   this.buildGraph_(true);
 }
