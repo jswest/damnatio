@@ -1,0 +1,181 @@
+.inspector {
+  position: absolute;
+  width: 200px;
+  height: $headerheight;
+  li {
+    color: $color7;
+    font-size: 13px;
+    line-height: $headerheight / 2;
+    font-family: "Source Sans Pro Extra Light";
+    font-weight: 400;
+    list-style: none;
+    text-align: center;
+    text-transform: uppercase;
+    height: $headerheight / 2;
+  }
+  th,
+  td {
+    color: $color7;
+    float: left;
+    font-size: 13px;
+    line-height: $headerheight / 2;
+    text-transform: uppercase;
+    height: $headerheight / 2;
+  }
+  th {
+    font-family: "Source Sans Pro Extra Light";
+    padding-right: 5px;
+  }
+  td {
+    font-family: "Source Sans Pro Black";
+    padding-left: 5px;
+  }
+}
+table.key {
+  position: absolute;
+  top: $headerheight;
+  right: 0;
+  width: 2$headerheight / 2;
+  z-index: 2;
+  tr {
+    height: $headerheight / 2;
+  }
+  td.colorblock {
+    padding-left: 0;
+    width: $headerheight / 2;
+    height: $headerheight / 2;
+  }
+  td {
+    color: $color4;
+    font-family: "Source Sans Pro Extra Light";
+    font-size: 11px;
+    line-height: $headerheight / 2;
+    padding-left: $headerheight / 2;
+    text-transform: uppercase;
+    width: 178px;
+    height: $headerheight / 2;
+  }
+}
+.words-overlay {
+  background-color: rgba(255,255,255,.75);
+  cursor: pointer;
+  overflow: hidden;
+  position: fixed;
+  top: $headerheight;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 44px);
+  z-index: 3;
+  .words {
+    margin-top: $headerheight;
+    margin-left: $headerheight;
+    padding-right: $headerheight / 2;
+    padding-bottom: $headerheight / 2;
+    overflow-y: scroll;
+    width: 600px;
+    height: 100%;
+    h1 {
+      font-size: $headerheight;
+      margin-bottom: $headerheight;
+      text-transform: uppercase;
+    }
+    br {
+      height: 33px;
+    }
+    p {
+      color: $color1;
+      margin-bottom: 0;
+      padding-bottom: 88px;
+      width: 100%;
+    }
+  }
+}
+ul.controls {
+  position: absolute;
+  top: ($headerheight * 2) + ($headerheight / 2);
+  left: $headerheight;
+  width: $headerheight * 6;
+  z-index: 2;
+  li {
+    background-color: $color2;
+    color: $color7;
+    cursor: pointer;
+    display: block;
+    font-family: "Source Sans Pro Extra Light";
+    font-size: $headerheight * (1/3);
+    line-height: $headerheight;
+    list-style: none;
+    margin-top: $headerheight / 4;
+    text-align: center;
+    text-transform: uppercase;
+    height: $headerheight;
+    transition: all 500ms;
+    &:hover {
+      background-color: $color5;
+    }
+    &.active {
+      background-color: $color5;
+      font-family: "Source Sans Pro Black";
+    }
+  }
+  &.clicked {
+    height: auto;
+  }
+}
+
+svg {
+  g.bubble-wrapper {
+    cursor: pointer;
+    circle {
+      fill: $color2;
+      transition: all 500ms;
+    }
+    &.active,
+    &:hover {
+      circle {
+        fill: $color6;
+      }
+      &.parent {
+        circle {
+          fill: none;
+        }
+      }
+    }
+    text {
+      fill: $color7;
+      font-family: "Source Sans Pro Extra Light";
+      font-weight: 400;
+      letter-spacing: 1px;
+      text-anchor: middle;
+      text-transform: uppercase;
+    }
+    &.parent {
+      circle {
+        fill: none;
+      }
+      circle:hover {
+        fill: none;
+      }
+    }
+  }
+  path.county {
+    stroke: $color1;
+    stroke-width: 0.25px;
+  }
+  path.state {
+    fill: transparent;
+    pointer-events: none;
+    stroke: $color1;
+    stroke-width: 1px;
+  }
+  .x-axis {
+    path.domain {
+      fill: none;
+    }
+    text {
+      fill: $color7;
+      font-family: "Source Sans Pro Extra Light";
+      font-size: 15px;
+    }
+  }
+}
