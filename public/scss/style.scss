@@ -1,148 +1,140 @@
-/* variable declarations */
-$bgcolor: rgb(0,0,0);
-$headercolor: rgb(255,255,255);
-$headerfont: "Source Sans Pro";
-$graphfont: "Helvetica Neue", "Helvetica";
-$graphtextcolor: rgb(150,150,150);
-$graphaxiscolor: rgb(150,150,150);
-$menubackgroundcolor: rgb(100,100,100);
-$menutextcolor: rgb(200,200,200);
-$menufont: "Source Sans Pro";
-$inspectortextcolor: rgb(0,0,0);
-$inspectorbackgroundcolor: rgb(200,200,200);
+@import "variables";
+@import "reset";
+@import "header";
+@import "minimap";
+@import "interactive";
 
 
-/* general styles */
-* {
-  margin: 0;
-  padding: 0;
-}
-html,
-body {
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-}
-section.section {
-  position: relative;
-  width: 100%
-}
-h1 {
-  color: $headercolor;
-  font-family: $headerfont;
-  font-weight: 800;
-  line-height: 1;
-  text-transform: uppercase;
-}
-svg {
-  path {
-    fill: none;
-  }
-  path.line {
-    stroke-width: 2px
-  }
-  g.y-axis,
-  g.x-axis {
-    text {
-      fill: $graphtextcolor;
-      font-family: $graphfont;
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 1.11px;
-      text-transform: uppercase;   
-    }
-    line {
-      stroke: $graphaxiscolor;
-      stroke-width: 0.5px;
-    }
-  }
-}
-.inspector {
-  background-color: $inspectorbackgroundcolor;
-  color: $inspectortextcolor;
-  font-family: "Source Sans Pro";
-  font-size: 13px;
-  line-height: 50px;
+
+
+
+#stream-wrapper {
+  background-color: $color2;
+  overflow-y: scroll;
   position: absolute;
-  text-align: center;
-  width: 200px;
-  height: 50px;
-}
-
-
-
-/* specific styles */
-.content {
-  overflow: scroll;
-  position: absolute;
-  top: 0;
+  top: $headerheight;
   left: 0;
   width: 100%;
-  height: 100%;
-}
-
-
-/* sections */
-.sections {
-  background-color: $bgcolor
-}
-#intro-section {
-  h1 {
-    font-size: 100px;
-    letter-spacing: 2px;
-    padding-top: 300px;
-    text-align: center;
+  height: calc(100% - 44px);
+  -webkit-transition: background-color 1s;
+  transition: background-color 1s;
+  &.active-interlude {
+    background-color: $color1;
   }
 }
-  
-  
 
-
-$menuliheight: 30px;
-$menuliwidth: 300px;
-.menu {
-  background-color: $menubackgroundcolor;
-  overflow: hidden;
-  position: absolute;
-  top: 10px;
-  right: 110px;
-  width: $menuliwidth;
-  height: $menuliheight;
-  li:first-child {
-    font-weight: 800;
-    padding-left: 20px;
-    width: $menuliwidth - 20px;
+#stream {
+  padding-bottom: $headerheight;
+  .interlude {
+    padding-bottom: 200px;
+    opacity: 1;
+    -webkit-transition: opacity 500ms;
+    transition: opacity 500ms;
+    &.out {
+      opacity: 0;
+    }
   }
-  li:hover {
-    background-color: rgb(150,150,150);
-  }
-  li {
-    color: $menutextcolor;
-    cursor: pointer;
-    font-family: $menufont;
-    font-size: 15px;
-    font-weight: 100;
-    letter-spacing: 1.5px;
-    line-height: $menuliheight;
-    list-style: none;
+  .pane {
+    clear: both;
     position: relative;
-    text-align: left;
-    text-transform: uppercase;
-    width: $menuliwidth;
-    height: $menuliheight;
-    .colorblock {
-      float: left;
-      width: 5px;
-      height: $menuliheight;
+    width: 100%;
+    // height: set in javascript
+    &.interactive {
+      h1.graph-title {
+        font-size: 44px;
+        position: absolute;
+        left: 44px;
+      }
+    }
+    &.narration {
+      h1, h2, h3 {
+        margin-left: $headerheight;
+        position: absolute;
+      }
+      h1.project-title {
+        font-size: $headerheight * 2;
+        top: calc(50% - 176px);
+      }
+      h2.byline {
+        color: $color2;
+        font-size: $headerheight / 2;
+        top: calc(50% + 88px);
+      }
+      p {
+        color: $color3;
+        font-family: "Source Sans Pro Black";
+        font-size: $headerheight * (3/4);
+        line-height: $headerheight;
+        margin-top: 200px;
+        margin-left: $headerheight;
+        width: 800px;
+      }
+      h1.title {
+        font-size: $headerheight * 2;
+        position: absolute;
+        top: calc(50% - 44px);
+      }
+      h2.subtitle {
+        color: $color2;
+        font-family: "Source Sans Pro Extra Light";
+        font-size: $headerheight / 2;
+        position: absolute;
+        top: calc(50% + 44px);
+      }
+      h3.kicker {
+        color: $color6;
+        font-size: $headerheight * (1/3);
+        position: absolute;
+        top: calc(50% - 88px);
+      }
+    }
+  }
+  .year {
+    clear: both;
+    position: relative;
+    left: 44px;
+    width: calc(100% - 44px);
+    .year-marker {
+      padding-top: $headerheight;
+      h1 {
+        color: $color2;
+        font-size: $headerheight * (2/3);
+      }
     }
     .name {
       float: left;
-      padding-left: 15px;
-      width: $menuliwidth - 5px - 15px;
-      height: $menuliheight;
+      width: 400px;
+      height: $headerheight;
+      h1 {
+        font-family: "Source Sans Pro Extra Light";
+        font-size: $headerheight * (2/3);
+      }
+      &.essay {
+        h1 {
+          color: $color4;
+          cursor: pointer;
+          font-family: "Source Sans Pro Black";
+        }
+        .essay-wrapper {
+          margin-top: $headerheight;
+          width: 600px;
+          p {
+            color: $color4;
+          }
+        }
+        .x {
+          opacity: 0;
+        }
+        &.expanded {
+          clear: both;
+          position: relative;
+          width: 100%;
+          height: auto;
+          .x {
+            opacity: 1;
+          }
+        }
+      }
     }
   }
-}
-.menu.clicked {
-  height: auto;
 }
