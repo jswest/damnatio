@@ -102,7 +102,8 @@ DAB.graphs.FauxStackedBar.prototype.renderKey_ = function () {
   this.element_.append('<dl class="interactive-key"></dl>');
   var interactiveKey = this.element_.find('.interactive-key');
 
-  // iterate over the current segment's values and add them and their color to the keys <dl>.
+  // Iterate over the current segment's values and add them and their color to
+  // the keys <dl>.
   _.each(this.schema_[this.currentSegment_].values, function (value, i) {
     interactiveKey.append(
         '<dl class="key-color-block" ' +
@@ -127,7 +128,9 @@ DAB.graphs.FauxStackedBar.prototype.initializeRects_ = function () {
       .data(this.data_)
       .enter()
       .append('rect')
-      .attr('width', this.xScale_(new Date('2014')) - this.xScale_(new Date('2013')))
+      .attr(
+          'width',
+          this.xScale_(new Date('2014')) - this.xScale_(new Date('2013')))
       .attr('height', this.yScale_(0) - this.yScale_(1));
 };
 
@@ -153,13 +156,17 @@ DAB.graphs.FauxStackedBar.prototype.colorGraph_ = function (needsTransition) {
       .delay(transitionDelay)
       .duration(transitionDuration)
       .style('fill', _.bind(function (d, i) {
-        return this.colorScale_(_.indexOf(this.schema_[this.currentSegment_].values, d[this.currentSegment_]));
+        return this.colorScale_(_.indexOf(
+          this.schema_[this.currentSegment_].values,
+          d[this.currentSegment_]));
       }, this));
 };
 
 
 DAB.graphs.FauxStackedBar.prototype.buildGraph_ = function (needsDelay) {
-  var transitionDelay = needsDelay ? this.durations_.flatten + this.durations_.reorder : 0;
+  var transitionDelay = needsDelay ?
+      this.durations_.flatten + this.durations_.reorder :
+      0;
   this.flattenGraph_(needsDelay);
   this.colorGraph_(needsDelay);
   var indices = {};
@@ -190,4 +197,3 @@ DAB.graphs.FauxStackedBar.prototype.updateGraph_ = function () {
 
 // TODO add a handler for hover that shows the footer data about each execution
 // TODO add a handler for click that shows a model about that execution
-
