@@ -4,8 +4,13 @@ $(document).ready( function () {
 	var sectionRegistry = new DAB.SectionRegistry(dataService);
 
 	sectionRegistry.registerSection(
-			$('#gss-sex-section'),
-			new DAB.sections.GssRaceSection({ element: $('#gss-sex-section') }));
+		$('#gss-race-section'),
+		new DAB.sections.GssRaceSection({ element: $('#gss-race-section') })
+	);
+	sectionRegistry.registerSection(
+		$('#modern-executions'),
+		new DAB.sections.ModernExecutionsSection({ element: $('#modern-executions') })
+	);
 
 	// Render the skeletons.
 	sectionRegistry.renderSections();

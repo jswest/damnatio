@@ -245,6 +245,8 @@ ul.controls {
   ul.controls.clicked {
     height: auto; }
 
+svg path.domain {
+  fill: none; }
 svg g.bubble-wrapper {
   cursor: pointer; }
   svg g.bubble-wrapper circle {

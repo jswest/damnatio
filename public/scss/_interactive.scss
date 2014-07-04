@@ -124,6 +124,9 @@ ul.controls {
 }
 
 svg {
+  path.domain {
+    fill: none;
+  }
   g.bubble-wrapper {
     cursor: pointer;
     circle {
