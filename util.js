@@ -9,7 +9,7 @@
 // client code.
 
 // Intentional globals.
-_ = require('./lib/underscore.js'); // This doesn't belong here.
+_ = require('underscore'); // This doesn't belong here.
 util = {};
 
 // Manifest file that describes where every class is located relative to the
