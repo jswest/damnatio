@@ -17,6 +17,10 @@ module.exports = function(grunt) {
       scss: {
         files: 'public/scss/**/*.scss',
         tasks: ['compass:build'],
+      },
+      build: {
+        files: ['views/**.jade', 'structure.json'],
+        tasks: 'build'
       }
     }
   });

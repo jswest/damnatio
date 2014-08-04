@@ -2,14 +2,13 @@
   "interludes": [
     {
       "id": "some-id",
-      "year": 1873,
+      "year": "2014",
       "class": "DAB.WhateverSection"
-    }
-  ],
-  "names": [
-    {
-      "name": "Garry Gillmore",
-      "year": "1982"
+    },
+     {
+      "id": "some-other-id",
+      "year": "2013",
+      "class": "DAB.WhateverSection"
     }
   ]
 }
