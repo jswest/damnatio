@@ -1,0 +1,15 @@
+{
+  "interludes": [
+    {
+      "id": "some-id",
+      "year": 1873,
+      "class": "DAB.WhateverSection"
+    }
+  ],
+  "names": [
+    {
+      "name": "Garry Gillmore",
+      "year": "1982"
+    }
+  ]
+}
