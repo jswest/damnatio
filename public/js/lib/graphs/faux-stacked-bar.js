@@ -58,43 +58,6 @@ DAB.graphs.FauxStackedBar.prototype.sortDataByCurrentSegment_ = function () {
 };
 
 
-DAB.graphs.FauxStackedBar.prototype.renderControls_ = function () {
-  this.element_.append('<ul class="controls"></ul>');
-  var controls = this.element_.find('.controls');
-  var sharedClass = 'control';
-
-  // iterate over the segments, and add each one to the controls menu.
-  _.each(this.segments_, function (segment) {
-    var classes = this.schema_[segment].key === this.initialSegment_ ?
-        sharedClass + ' current-segment' :
-        sharedClass;
-    controls.append(
-      '<li class="' + classes + '" data-segment="' + segment + '">' +
-        util.titleize(segment) +
-      '</li>'
-    );
-  }, this);
-};
-
-
-DAB.graphs.FauxStackedBar.prototype.bindControls_ = function () {
-  var that = this;
-  var controls = this.element_.find('ul.controls');
-  var control = controls.find('.control');
-  controls.on('click', function (e) {
-    $(this).toggle('clicked');
-  });
-  control.on('click', function (e) {
-    if (!$(this).hasClass('current-segment')) {
-      control.removeClass('current-segment');
-      $(this).addClass('current-segment');
-      that.currentSegment_ = $(this).data('segment');
-      that.updateGraph_();
-    }
-  });
-};
-
-
 DAB.graphs.FauxStackedBar.prototype.renderKey_ = function () {
   this.element_.append('<dl class="interactive-key"></dl>');
   var interactiveKey = this.element_.find('.interactive-key');

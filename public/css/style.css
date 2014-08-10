@@ -283,7 +283,6 @@ svg .x-axis text {
   font-size: 15px; }
 
 #stream-wrapper {
-  background-color: #463e40;
   overflow-y: scroll;
   position: absolute;
   top: 44px;
@@ -292,8 +291,6 @@ svg .x-axis text {
   height: calc(100% - 44px);
   -webkit-transition: background-color 1s;
   transition: background-color 1s; }
-  #stream-wrapper.active-interlude {
-    background-color: #231f20; }
 
 #stream {
   padding-bottom: 44px; }

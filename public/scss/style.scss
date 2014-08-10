@@ -9,7 +9,7 @@
 
 
 #stream-wrapper {
-  background-color: $color2;
+  //background-color: $color2;
   overflow-y: scroll;
   position: absolute;
   top: $headerheight;
@@ -19,7 +19,7 @@
   -webkit-transition: background-color 1s;
   transition: background-color 1s;
   &.active-interlude {
-    background-color: $color1;
+    //background-color: $color1;
   }
 }
 

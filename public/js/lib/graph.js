@@ -223,3 +223,39 @@ DAB.Graph.prototype.getYRange_ = function () {
     this.height_ - this.padding_.bottom
   ];
 };
+
+DAB.Graph.prototype.renderControls_ = function () {
+  this.element_.append('<ul class="controls"></ul>');
+  var controls = this.element_.find('.controls');
+  var sharedClass = 'control';
+
+  // iterate over the segments, and add each one to the controls menu.
+  _.each(this.segments_, function (segment) {
+    var classes = this.schema_[segment].key === this.initialSegment_ ?
+        sharedClass + ' current-segment' :
+        sharedClass;
+    controls.append(
+      '<li class="' + classes + '" data-segment="' + segment + '">' +
+        util.titleize(segment) +
+      '</li>'
+    );
+  }, this);
+};
+
+
+DAB.Graph.prototype.bindControls_ = function () {
+  var that = this;
+  var controls = this.element_.find('ul.controls');
+  var control = controls.find('.control');
+  controls.on('click', function (e) {
+    $(this).toggleClass('clicked');
+  });
+  control.on('click', function (e) {
+    if (!$(this).hasClass('current-segment')) {
+      control.removeClass('current-segment');
+      $(this).addClass('current-segment');
+      that.currentSegment_ = $(this).data('segment');
+      that.updateGraph_();
+    }
+  });
+};
