@@ -43,7 +43,7 @@ var builder = {
         });
       }
     });
-    fs.writeFileSync('index.html', templateFn({sections: sections}));
+    fs.writeFileSync('views/index.html', templateFn({sections: sections}));
   }
 }
 
