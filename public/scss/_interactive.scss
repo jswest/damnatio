@@ -66,6 +66,9 @@ table.key {
   width: 100%;
   height: calc(100% - 44px);
   z-index: 3;
+  .x {
+    top: 44px;
+  }
   .words {
     margin-top: $headerheight;
     margin-left: $headerheight;

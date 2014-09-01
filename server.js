@@ -22,6 +22,9 @@ app.configure( function () {
 app.get( '/', function (req, res) {
   res.render('index.html');
 });
+app.get('/last-words.json', function (req, res) {
+  res.send(require('./data/interludes/last-words/last-words.json'));
+});
 
 // Start yer engines.
 http

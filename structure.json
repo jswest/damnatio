@@ -1,14 +1,26 @@
 {
   "interludes": [
     {
-      "id": "some-id",
+      "id": "last-words-interlude",
       "year": "1979",
-      "class": "DAB.WhateverSection"
+      "class": "DAB.LastWords",
+      "panes": [
+        {
+          "type": "narration-title",
+          "title": "Last Words",
+          "subtitle": "Final statements from the condemned in Texas"
+        },
+        {
+          "type": "narration-paragraph",
+          "paragraph": "Texas keeps a database of the last words of its condemned. The following are the top fifty most common words for their final statments. Clicking on each bubble brings up a representative statement in full."
+        }
+      ]
     },
      {
       "id": "some-other-id",
       "year": "2013",
-      "class": "DAB.WhateverSection"
+      "class": "DAB.WhateverSection",
+      "panes": []
     }
   ]
 }

@@ -1,5 +1,5 @@
 DAB = {};
-
+DAB.interludes = [];
 
 
 DAB.App = function () {
@@ -36,4 +36,10 @@ DAB.App = function () {
 $(document).ready(function () {
   DAB.app = new DAB.App();
   DAB.app.on();
+
+  // TODO: make this happen on inview
+  _.each(DAB.interludes, function (interlude) {
+    interlude.on();
+  });
+
 });

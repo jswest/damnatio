@@ -39,7 +39,8 @@ var builder = {
       if (interlude) {
         sections.push({
           type: "interlude",
-          id: interlude.id
+          id: interlude.id,
+          panes: interlude.panes || []
         });
       }
     });

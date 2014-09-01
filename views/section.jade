@@ -7,3 +7,12 @@ case section.type
         include name
   when "interlude"
     div.interlude.view-section(id="#{section.id}")
+      each pane in section.panes
+        div.pane.narration
+          case pane.type
+            when "narration-title"
+              h3.kicker interlude
+              h1.title #{pane.title}
+              h2.subtitle #{pane.subtitle}
+            when "narration-paragraph"
+              p #{pane.paragraph}

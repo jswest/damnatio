@@ -193,6 +193,8 @@ table.key {
   width: 100%;
   height: calc(100% - 44px);
   z-index: 3; }
+  .words-overlay .x {
+    top: 44px; }
   .words-overlay .words {
     margin-top: 44px;
     margin-left: 44px;
