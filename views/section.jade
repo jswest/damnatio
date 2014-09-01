@@ -1,0 +1,9 @@
+case section.type
+  when "year"
+    div.year.view-section(id="year-#{section.year}")
+      div.year-marker
+        h1 #{section.year}
+      each name in section.names
+        include name
+  when "interlude"
+    div.interlude.view-section(id="#{section.id}")

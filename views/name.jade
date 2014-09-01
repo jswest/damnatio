@@ -1,0 +1,8 @@
+- var hasEssay = name.essay !== undefined
+- var className = hasEssay ? 'essay' : ''
+section.name(class="#{className}")
+  h1 #{name.name}
+  if hasEssay
+    div.essay-wrapper
+      != name.essay
+    button.x

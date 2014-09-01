@@ -1,0 +1,14 @@
+{
+  "interludes": [
+    {
+      "id": "some-id",
+      "year": "2014",
+      "class": "DAB.WhateverSection"
+    },
+     {
+      "id": "some-other-id",
+      "year": "2013",
+      "class": "DAB.WhateverSection"
+    }
+  ]
+}

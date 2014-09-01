@@ -1,5 +1,5 @@
 module.exports = function(grunt) {
-  
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     compass: {
@@ -17,6 +17,10 @@ module.exports = function(grunt) {
       scss: {
         files: 'public/scss/**/*.scss',
         tasks: ['compass:build'],
+      },
+      build: {
+        files: ['views/**.jade', 'structure.json'],
+        tasks: 'build'
       }
     }
   });
@@ -24,4 +28,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks( 'grunt-contrib-compass' );
   grunt.loadNpmTasks( 'grunt-contrib-watch' );
   grunt.registerTask('default', ['compass:build', 'watch']);
+  grunt.registerTask('build', 'Build the html structure of the site from structure.json', function() {
+    var builder = require('./builder.js');
+    builder.build('structure.json', 'index.html');
+  });
 };
