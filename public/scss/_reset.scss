@@ -24,12 +24,13 @@ button {
   background-image: url('../images/big-x.png');
   cursor: pointer;
   position: absolute;
-  top: $headerheight * 2;
+  top: 0;
   right: $headerheight;
   width: 100px;
   height: 100px;
 }
-p {
+p,
+ul li {
   color: $color4;
   font-family: "PT Serif";
   font-size: 15px;

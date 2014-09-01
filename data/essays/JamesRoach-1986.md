@@ -1,6 +1,6 @@
-# Foramina quid fibra Thessalidum crimen obstructaque ictus
+## Foramina quid fibra Thessalidum crimen obstructaque ictus
 
-## Ruit confiteor purus
+### Ruit confiteor purus
 
 Lorem markdownum Epidauria iuvenis madefactaque potest, quae simul ictibus.
 Fores relictis [belloque causa](http://www.thesecretofinvisibility.com/);
@@ -10,11 +10,7 @@ Iam suos fecit virginis monitisque figura pervenit, securaque atri: signisque
 dis rerumque, coniunx tyranni. Se labitur sua carcere fama est levitate,
 exspectatoque quae rotatis dixit heu, nec videt.
 
-- Restabat obstipuere coniuge
-- Subiere fundere comites vehebat carpitur spes
-- Imperat te Oenides
-
-## Procris cognoscere excutit
+### Procris cognoscere excutit
 
 Sed hoc cuspide annis Rhexenore fera fletumque a carcere, Cycnum attulit,
 totaque mixta, diro in stabat! Capere falleris, ista silices vultus mirarique ut

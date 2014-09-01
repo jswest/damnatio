@@ -14,15 +14,25 @@ html
 				button#share-button share
 				button#about-button about
 
-		nav#minimap
+		nav#minimap.collapsed
 			ol#minimap-list
-				div.color
+			div.color
 
 		#stream-wrapper
 			#stream
+				article.interlude
+					.pane.narration
+						h1.project-title Damnatio ad Bestias
+						h2.byline by Galen Beebe, Gabe Isman, and John West
+					.pane.narration
+						p In 1974, the Supreme Court ruled that capital punishment was not unconstitutional, and the death penalty, which had been paused for a decade, was implemented again in 26 states.
+					.pane.narration
+						p Here are the names of every person executed since that Supreme Court ruling. We have highlighted some names, and there are a series of interludes throughout.
 				each section in sections
 					include section
 		script(type='text/javascript' src='/js/vendor/jquery.min.js')
 		script(type='text/javascript' src='/js/vendor/underscore.min.js')
 		script(type='text/javascript' src='/js/vendor/backbone.js')
 		script(type='text/javascript' src='/js/vendor/d3.min.js')
+
+		script(type='text/javascript' src='/js/app.js')

@@ -26,6 +26,7 @@
 #stream {
   padding-bottom: $headerheight;
   .interlude {
+    clear: both;
     padding-bottom: 200px;
     opacity: 1;
     -webkit-transition: opacity 500ms;
@@ -36,9 +37,10 @@
   }
   .pane {
     clear: both;
+    display: block;
     position: relative;
     width: 100%;
-    // height: set in javascript
+    // height: calc(100% - 44px);
     &.interactive {
       h1.graph-title {
         font-size: 44px;
@@ -98,16 +100,17 @@
       padding-top: $headerheight;
       h1 {
         color: $color2;
-        font-size: $headerheight * (2/3);
+        font-size: $headerheight * (1/2);
+        line-height: $headerheight;
       }
     }
     .name {
       float: left;
-      width: 400px;
-      height: $headerheight;
+      width: 350px;
+      height: $headerheight * (2/3);
       h1 {
         font-family: "Source Sans Pro Extra Light";
-        font-size: $headerheight * (2/3);
+        font-size: $headerheight * (1/2);
       }
       &.essay {
         h1 {
@@ -115,11 +118,29 @@
           cursor: pointer;
           font-family: "Source Sans Pro Black";
         }
-        .essay-wrapper {
+        h2 {
+          font-size: $headerheight * (1/2);
+          line-height: $headerheight * (1/2);
           margin-top: $headerheight;
+        }
+        h3 {
+          font-size: 14px;
+          line-height: $headerheight * (1/2);
+          margin-top: $headerheight;
+
+        }
+        .essay-wrapper {
+          display: none;
+          margin-top: $headerheight;
+          padding-bottom: $headerheight * 2;
           width: 600px;
           p {
             color: $color4;
+            a {
+              color: $color6;
+              font-weight: 800;
+              text-decoration: none;
+            }
           }
         }
         .x {
@@ -130,8 +151,14 @@
           position: relative;
           width: 100%;
           height: auto;
+          h1 {
+            font-size: $headerheight;
+          }
           .x {
             opacity: 1;
+          }
+          .essay-wrapper {
+            display: block;
           }
         }
       }

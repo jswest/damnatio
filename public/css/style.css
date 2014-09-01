@@ -23,12 +23,13 @@ button {
   background-image: url("../images/big-x.png");
   cursor: pointer;
   position: absolute;
-  top: 88px;
+  top: 0;
   right: 44px;
   width: 100px;
   height: 100px; }
 
-p {
+p,
+ul li {
   color: #d2bbc0;
   font-family: "PT Serif";
   font-size: 15px;
@@ -82,7 +83,7 @@ header#primary-header {
   overflow-y: scroll;
   position: absolute;
   top: 44px;
-  right: 0;
+  right: -200px;
   width: 220px;
   height: calc(100% - 44px);
   z-index: 3;
@@ -116,25 +117,20 @@ header#primary-header {
         font-family: "Source Sans Pro Black";
         margin-left: 22px;
         text-transform: uppercase; }
-    #minimap #minimap-list .color {
-      background-color: #463e40;
-      opacity: 0.75;
-      position: absolute;
-      top: 0;
-      left: -22px;
-      width: 220px;
-      height: 100%;
-      z-index: 0;
-      -webkit-transition: all 500ms;
-      transition: all 500ms; }
-  #minimap.collapsed {
-    right: -200px; }
-    #minimap.collapsed #minimap-list .color {
-      opacity: 0; }
-    #minimap.collapsed:hover {
-      right: 0; }
-      #minimap.collapsed:hover #minimap-list .color {
-        opacity: 0.75; }
+  #minimap .color {
+    background-color: #463e40;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    -webkit-transition: all 500ms;
+    transition: all 500ms; }
+  #minimap:hover {
+    right: 0; }
+    #minimap:hover .color {
+      opacity: 0.75; }
 
 .inspector {
   position: absolute;
@@ -296,6 +292,7 @@ svg .x-axis text {
 #stream {
   padding-bottom: 44px; }
   #stream .interlude {
+    clear: both;
     padding-bottom: 200px;
     opacity: 1;
     -webkit-transition: opacity 500ms;
@@ -304,6 +301,7 @@ svg .x-axis text {
       opacity: 0; }
   #stream .pane {
     clear: both;
+    display: block;
     position: relative;
     width: 100%; }
     #stream .pane.interactive h1.graph-title {
@@ -352,23 +350,38 @@ svg .x-axis text {
       padding-top: 44px; }
       #stream .year .year-marker h1 {
         color: #463e40;
-        font-size: 29.33333px; }
+        font-size: 22px;
+        line-height: 44px; }
     #stream .year .name {
       float: left;
-      width: 400px;
-      height: 44px; }
+      width: 350px;
+      height: 29.33333px; }
       #stream .year .name h1 {
         font-family: "Source Sans Pro Extra Light";
-        font-size: 29.33333px; }
+        font-size: 22px; }
       #stream .year .name.essay h1 {
         color: #d2bbc0;
         cursor: pointer;
         font-family: "Source Sans Pro Black"; }
+      #stream .year .name.essay h2 {
+        font-size: 22px;
+        line-height: 22px;
+        margin-top: 44px; }
+      #stream .year .name.essay h3 {
+        font-size: 14px;
+        line-height: 22px;
+        margin-top: 44px; }
       #stream .year .name.essay .essay-wrapper {
+        display: none;
         margin-top: 44px;
+        padding-bottom: 88px;
         width: 600px; }
         #stream .year .name.essay .essay-wrapper p {
           color: #d2bbc0; }
+          #stream .year .name.essay .essay-wrapper p a {
+            color: #00b3ff;
+            font-weight: 800;
+            text-decoration: none; }
       #stream .year .name.essay .x {
         opacity: 0; }
       #stream .year .name.essay.expanded {
@@ -376,5 +389,9 @@ svg .x-axis text {
         position: relative;
         width: 100%;
         height: auto; }
+        #stream .year .name.essay.expanded h1 {
+          font-size: 44px; }
         #stream .year .name.essay.expanded .x {
           opacity: 1; }
+        #stream .year .name.essay.expanded .essay-wrapper {
+          display: block; }

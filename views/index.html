@@ -15,13 +15,24 @@
         <button id="about-button">about</button>
       </nav>
     </header>
-    <nav id="minimap">
-      <ol id="minimap-list">
-        <div class="color"></div>
-      </ol>
+    <nav id="minimap" class="collapsed">
+      <ol id="minimap-list"></ol>
+      <div class="color"></div>
     </nav>
     <div id="stream-wrapper">
       <div id="stream">
+        <article class="interlude">
+          <div class="pane narration">
+            <h1 class="project-title">Damnatio ad Bestias</h1>
+            <h2 class="byline">by Galen Beebe, Gabe Isman, and John West</h2>
+          </div>
+          <div class="pane narration">
+            <p>In 1974, the Supreme Court ruled that capital punishment was not unconstitutional, and the death penalty, which had been paused for a decade, was implemented again in 26 states.</p>
+          </div>
+          <div class="pane narration">
+            <p>Here are the names of every person executed since that Supreme Court ruling. We have highlighted some names, and there are a series of interludes throughout.</p>
+          </div>
+        </article>
         <div id="year-1977" class="year view-section">
           <div class="year-marker">
             <h1>1977</h1>
@@ -41,6 +52,7 @@
             <h1>John Spenkelink</h1>
           </section>
         </div>
+        <div id="some-id" class="interlude view-section"></div>
         <div id="year-1981" class="year view-section">
           <div class="year-marker">
             <h1>1981</h1>
@@ -213,9 +225,9 @@
           </div>
           <section class="name essay">
             <h1>James Roach</h1>
-            <div class="essay-wrapper"><h1>Foramina quid fibra Thessalidum crimen obstructaque ictus</h1>
+            <div class="essay-wrapper"><h2>Foramina quid fibra Thessalidum crimen obstructaque ictus</h2>
 
-<h2>Ruit confiteor purus</h2>
+<h3>Ruit confiteor purus</h3>
 
 <p>Lorem markdownum Epidauria iuvenis madefactaque potest, quae simul ictibus.
 Fores relictis <a href="http://www.thesecretofinvisibility.com/">belloque causa</a>;
@@ -225,9 +237,7 @@ Iam suos fecit virginis monitisque figura pervenit, securaque atri: signisque
 dis rerumque, coniunx tyranni. Se labitur sua carcere fama est levitate,
 exspectatoque quae rotatis dixit heu, nec videt.</p>
 
-<ul><li>Restabat obstipuere coniuge</li><li>Subiere fundere comites vehebat carpitur spes</li><li>Imperat te Oenides</li></ul>
-
-<h2>Procris cognoscere excutit</h2>
+<h3>Procris cognoscere excutit</h3>
 
 <p>Sed hoc cuspide annis Rhexenore fera fletumque a carcere, Cycnum attulit,
 totaque mixta, diro in stabat! Capere falleris, ista silices vultus mirarique ut
@@ -4362,12 +4372,12 @@ nulla ingeminat interius exclamo? Primus memor videndo ora Cretaeas multi,
             <h1>Robert Hendrix</h1>
           </section>
         </div>
-        <div id="some-id" class="interlude view-section"></div>
       </div>
     </div>
     <script type="text/javascript" src="/js/vendor/jquery.min.js"></script>
     <script type="text/javascript" src="/js/vendor/underscore.min.js"></script>
     <script type="text/javascript" src="/js/vendor/backbone.js"></script>
     <script type="text/javascript" src="/js/vendor/d3.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
   </body>
 </html>
