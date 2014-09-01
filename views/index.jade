@@ -7,6 +7,17 @@ html
 		meta(charset='utf-8')
 		meta(name='viewport', content='width=device-width')
 	body
+
+		header#primary-header
+			h1.project-title Damnatio ad bestias
+			nav
+				button#share-button share
+				button#about-button about
+
+		nav#minimap
+			ol#minimap-list
+				div.color
+
 		#stream-wrapper
 			#stream
 				each section in sections
