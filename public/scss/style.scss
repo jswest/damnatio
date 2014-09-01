@@ -42,10 +42,18 @@
     width: 100%;
     // height: calc(100% - 44px);
     &.interactive {
-      h1.graph-title {
-        font-size: 44px;
+      h1.interactive-title {
+        color: $color6;
         position: absolute;
-        left: 44px;
+        top: 0;
+        left: $headerheight;
+      }
+      h2.interactive-subtitle {
+        font-family: "Source Sans Pro Extra Light";
+        font-size: $headerheight / 2;
+        position: absolute;
+        left: $headerheight;
+        top: $headerheight;
       }
     }
     &.narration {

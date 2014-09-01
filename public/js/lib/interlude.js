@@ -24,6 +24,15 @@ DAB.Interlude = function (options) {
     this.url = options.url;
   }
 
+  if (_.isUndefined(options.title)) {
+    throw new Error('Interludes need titles.');
+  }
+  else {
+    this.title = options.title;
+  }
+
+  this.subtitle = _.isUndefined(options.subtitle) ? "" : options.subtitle;
+
   if (_.isUndefined(options.build) || typeof options.build !== 'function') {
     this.build = function () {};
   }
@@ -38,6 +47,8 @@ DAB.Interlude = function (options) {
     that.svg = d3.select(that.el[0]).append('svg')
       .attr('width', that.el.width())
       .attr('height', that.el.height());
+    that.el.append('<h1 class="interactive-title">' + that.title + '</h1>');
+    that.el.append('<h2 class="interactive-subtitle">' + that.subtitle + '</h2>');
   };
 
   this.requestData = function () {
