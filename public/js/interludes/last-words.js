@@ -63,6 +63,18 @@ DAB.interludes.push(new DAB.Interlude({
 
     that.svg.selectAll('g.bubble-wrapper').on('click', function (d) {
       var d3el = d3.select(this);
+      
+      // add blurs
+      var defs = that.svg.append("defs");
+      var filter = defs.append("filter")
+        .attr("id", "bubble-blur");
+      filter.append("feGaussianBlur")
+        .attr("in", "SourceGraphic")
+        .attr("stdDeviation", 10);
+      that.svg.selectAll('g.bubble-wrapper').attr('filter', 'url(#bubble-blur)');
+      that.el.find('h1').addClass('blur');
+      that.el.find('h2').addClass('blur');
+
       d3el.classed('active', true);
       that.el.append(
         '<div class="words-overlay">' +
@@ -74,9 +86,11 @@ DAB.interludes.push(new DAB.Interlude({
         '</div>'
       );
       that.el.find('.words-overlay').on('click', function (e) {
+        that.svg.selectAll('g.bubble-wrapper').attr('filter', '');
         $(this).remove();
         d3el.classed('active', false);
-      })
+        that.el.find('h1, h2').removeClass('blur');
+      });
     });
 
   }

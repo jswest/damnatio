@@ -6,8 +6,6 @@ DAB.App = function () {
 
   var nameXClickHandler = function (e) {
     e.stopPropagation(); // annoying. fix this.
-    console.log('clicked')
-    console.log($(this).parent());
     $(this).parent().removeClass('expanded');
   };
 
