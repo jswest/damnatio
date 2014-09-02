@@ -71,7 +71,9 @@ svg .x-axis text { fill: white; font-family: "Source Sans Pro Extra Light"; font
 #stream .interlude.out { opacity: 0; }
 #stream .pane { clear: both; display: block; position: relative; width: 100%; }
 #stream .pane.interactive h1.interactive-title { color: #00b3ff; position: absolute; top: 0; left: 44px; }
-#stream .pane.interactive h2.interactive-subtitle { font-family: "Source Sans Pro Extra Light"; font-size: 22px; position: absolute; left: 44px; top: 44px; }
+#stream .pane.interactive h1.interactive-title.blur { -webkit-filter: blur(15px); filter: blur(15px); }
+#stream .pane.interactive h2.interactive-subtitle { color: #463e40; font-family: "Source Sans Pro Extra Light"; font-size: 22px; position: absolute; left: 44px; top: 44px; }
+#stream .pane.interactive h2.interactive-subtitle.blur { -webkit-filter: blur(15px); filter: blur(15px); }
 #stream .pane.narration h1, #stream .pane.narration h2, #stream .pane.narration h3 { margin-left: 44px; position: absolute; }
 #stream .pane.narration h1.project-title { font-size: 88px; top: calc(50% - 176px); }
 #stream .pane.narration h2.byline { color: #463e40; font-size: 22px; top: calc(50% + 88px); }

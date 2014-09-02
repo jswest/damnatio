@@ -47,13 +47,22 @@
         position: absolute;
         top: 0;
         left: $headerheight;
+        &.blur {
+          -webkit-filter: blur(15px);
+          filter: blur(15px);
+        }
       }
       h2.interactive-subtitle {
+        color: $color2;
         font-family: "Source Sans Pro Extra Light";
         font-size: $headerheight / 2;
         position: absolute;
         left: $headerheight;
         top: $headerheight;
+        &.blur {
+          -webkit-filter: blur(15px);
+          filter: blur(15px);
+        }
       }
     }
     &.narration {
