@@ -2,8 +2,7 @@
   "interludes": [
     {
       "id": "last-words-interlude",
-      "year": "1979",
-      "class": "DAB.LastWords",
+      "year": "1988",
       "panes": [
         {
           "type": "narration-title",
@@ -17,10 +16,19 @@
       ]
     },
      {
-      "id": "some-other-id",
-      "year": "2013",
-      "class": "DAB.WhateverSection",
-      "panes": []
+      "id": "unusual-punishment-interlude",
+      "year": "1998",
+      "panes": [
+        {
+          "type": "narration-title",
+          "title": "Unusual Punishment",
+          "subtitle": "How a small minority of counties account for a vast majority of executions."
+        },
+        {
+          "type": "narration-paragraph",
+          "paragraph": "According to a study by the Death Penalty Information Center, roughly 10 percent of counties represent 90 percent of executions. Here is a map of the executions by county. Hovering on a county brings up more information."
+        }
+      ]
     }
   ]
 }
