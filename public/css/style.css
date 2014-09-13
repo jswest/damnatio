@@ -17,8 +17,7 @@ header#primary-header nav { position: absolute; top: 0; right: 44px; width: 200p
 header#primary-header nav button { color: #8c7c80; float: right; font-size: 18px; font-weight: 400; line-height: 22px; margin-left: 22px; margin-top: 11px; text-transform: uppercase; height: 22px; -webkit-transition: opacity 0.5s; transition: opacity 0.5s; }
 header#primary-header nav button.discourage { opacity: .5; }
 
-#minimap { cursor: pointer; overflow-x: hidden; overflow-y: scroll; position: absolute; top: 44px; right: -200px; width: 220px; height: calc(100% - 44px); z-index: 3; -webkit-transition: all 500ms; transition: all 500ms; /*.color { background-color: $color2; opacity: 0; position: absolute; top: 0; width: 100%; height: 100%; z-index: 0;
-}*/ }
+#minimap { cursor: pointer; overflow-x: hidden; overflow-y: scroll; position: absolute; top: 44px; right: -200px; width: 220px; height: calc(100% - 44px); z-index: 3; -webkit-transition: all 500ms; transition: all 500ms; }
 #minimap #minimap-list { background-color: rgba(70, 62, 64, 0.5); padding-bottom: 22px; padding-left: 20px; position: relative; left: 0; width: 200px; height: auto; -webkit-transition: all 500ms; transition: all 500ms; }
 #minimap #minimap-list li { font-size: 11px; line-height: 11px; list-style: none; padding-top: 11px; position: relative; z-index: 1; }
 #minimap #minimap-list li.minimap-year { color: black; font-family: "Source Sans Pro Extra Light"; margin-top: 11px; text-align: left; }
