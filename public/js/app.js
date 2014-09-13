@@ -15,6 +15,30 @@ DAB.App = function () {
     }
   };
 
+  var overlayButtonClickHandler = function (e) {
+    $('#' + $(this).data('overlay')).addClass('active');
+    $('#overlay').addClass('active');
+    $('svg').each(function (i) {
+      var defs = $(this).append("defs");
+      var filter = defs.append("filter")
+        .attr("id", "blur-" + i);
+      filter.append("feGaussianBlur")
+        .attr("in", "SourceGraphic")
+        .attr("stdDeviation", 10);
+      $('svg').attr('filter', 'url(#blur-' + i + ')');
+    });
+    $('#stream').addClass('blur');
+  };
+
+  var overlayXClickHandler = function (e) {
+    $('.overlay').removeClass('active');
+    $('#overlay').removeClass('active');
+    $('#stream').removeClass('blur');
+    $('svg').each(function (i) {
+      $('svg').attr('filter', '');
+    });
+  };
+
   var windowResizeHandler = function (e) {
     $('.pane').height($(window).height() - 44);
   };
@@ -23,6 +47,8 @@ DAB.App = function () {
     $('.name').on('click', nameClickHandler);
     $('.essay .x').on('click', nameXClickHandler);
     $('.pane').height($(window).height() - 44);
+    $('#overlay .x').on('click', overlayXClickHandler);
+    $('header#primary-header button').on('click', overlayButtonClickHandler);
   };
   
 };

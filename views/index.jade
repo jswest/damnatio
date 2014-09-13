@@ -11,8 +11,8 @@ html
 		header#primary-header
 			h1.project-title Damnatio ad bestias
 			nav
-				button#share-button share
-				button#about-button about
+				button#share-button(data-overlay='share-overlay') share
+				button#about-button(data-overlay='about-overlay') about
 
 		nav#minimap.collapsed
 			ol#minimap-list
@@ -31,6 +31,34 @@ html
 						p Here are the names of every person executed since that Supreme Court ruling. We have highlighted some names, and there are a series of interludes throughout.
 				each section in sections
 					include section
+
+		#overlay
+			button.x
+			article#about-overlay.overlay
+				header.overlay-header
+					h1 about
+				section
+					h2 this project
+					p Nullam ut ipsum interdum, convallis ex ut, pulvinar risus. Proin arcu turpis, interdum et dapibus ac, malesuada in urna. Maecenas viverra velit vel nibh rutrum, at cursus ex ornare. Vestibulum blandit dapibus ante, sed malesuada eros ullamcorper interdum. Donec ut rutrum enim. Aenean tristique ex eget lectus euismod rutrum. Fusce sed mi sit amet nunc aliquam tincidunt eget a enim. Vestibulum egestas in lectus in interdum. Aenean dictum consequat ultrices. Sed vitae erat ac augue malesuada viverra ac at justo. In hac habitasse platea dictumst. Quisque sapien odio, pulvinar sed augue facilisis, pharetra molestie lorem. Aliquam vestibulum pulvinar quam. Praesent venenatis lacus at viverra gravida. Proin eu imperdiet quam. Nam arcu lorem, porttitor at laoreet sed, ornare sit amet erat.
+				section
+					h2 biographies
+					h3 galen beebe
+					h4 senior editor
+					p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fringilla risus at ipsum suscipit pharetra. Integer sem dolor, porttitor a viverra eu, facilisis non nunc. Suspendisse cursus arcu sit amet fringilla ultricies. Sed ornare faucibus orci, id fringilla tortor congue sit amet. Donec ante nisi, aliquam vel vulputate sit amet, sollicitudin a nulla. Duis sodales dictum mi tincidunt ullamcorper. Etiam enim ipsum, rhoncus facilisis turpis ac, efficitur sodales metus. In vel odio justo.
+					h3 gabe isman
+					h4 engineering editor
+					p Cras scelerisque semper urna, in suscipit risus fringilla eget. Nulla nec congue nunc. Vivamus id metus tempus, bibendum dui vitae, venenatis erat. Integer finibus libero sit amet commodo finibus. Aliquam erat volutpat. Mauris quis vehicula justo. Mauris varius semper urna, vel sagittis purus suscipit id. Mauris volutpat orci ut enim feugiat accumsan.
+					h3 john west
+					h4 editor-in-chief
+					p Vestibulum id rhoncus nunc. Sed dignissim eros ac elit imperdiet, eu tincidunt odio volutpat. Nulla convallis velit vitae odio ornare, eu elementum nunc venenatis. Suspendisse placerat est ante, non porttitor urna imperdiet at. Praesent dignissim vitae nunc a vestibulum. Integer laoreet ipsum at tempus sollicitudin. Donec ut placerat neque. Sed sagittis elit sit amet ultrices viverra. Curabitur hendrerit lorem non pretium venenatis. Pellentesque lobortis viverra augue in eleifend. Ut rutrum, metus vel efficitur iaculis, odio ligula dapibus mauris, eu fermentum felis leo aliquet nulla. Suspendisse ullamcorper orci id magna congue, vitae blandit ex egestas. Curabitur in eros quis erat porta congue. Praesent nec vehicula lorem, vel euismod tortor.
+				section
+					h2 etc gallery
+					p Mauris facilisis feugiat lacus quis ultricies. Mauris in lorem fermentum, molestie nunc pulvinar, molestie mi. Sed tristique cursus felis ut semper. Fusce ut turpis condimentum, consectetur nunc vitae, placerat augue. Donec malesuada arcu sodales condimentum rhoncus. Sed eu auctor nisi. Pellentesque pulvinar ante eu mauris convallis scelerisque. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi finibus dolor erat, et malesuada magna feugiat vitae. Aliquam commodo ante ut convallis lacinia. Praesent dignissim, sem sit amet tristique mollis, magna odio auctor risus, ac vehicula purus justo id lorem.
+				section
+					h2 thank you
+					p Vestibulum id rhoncus nunc. Sed dignissim eros ac elit imperdiet, eu tincidunt odio volutpat. Nulla convallis velit vitae odio ornare, eu elementum nunc venenatis. Suspendisse placerat est ante, non porttitor urna imperdiet at. Praesent dignissim vitae nunc a vestibulum. Integer laoreet ipsum at tempus sollicitudin. Donec ut placerat neque. Sed sagittis elit sit amet ultrices viverra. Curabitur hendrerit lorem non pretium venenatis. Pellentesque lobortis viverra augue in eleifend. Ut rutrum, metus vel efficitur iaculis, odio ligula dapibus mauris, eu fermentum felis leo aliquet nulla. Suspendisse ullamcorper orci id magna congue, vitae blandit ex egestas. Curabitur in eros quis erat porta congue. Praesent nec vehicula lorem, vel euismod tortor.
+
+			article#share-overlay.overlay
 		script(type='text/javascript' src='/js/vendor/jquery.min.js')
 		script(type='text/javascript' src='/js/vendor/underscore.min.js')
 		script(type='text/javascript' src='/js/vendor/backbone.js')

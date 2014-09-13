@@ -3,6 +3,7 @@
 @import "header";
 @import "minimap";
 @import "interactive";
+@import "overlay";
 
 
 
@@ -25,6 +26,10 @@
 
 #stream {
   padding-bottom: $headerheight;
+  &.blur {
+    -webkit-filter: blur(15px);
+    filter: blur(15px);
+  }
   .interlude {
     clear: both;
     padding-bottom: 200px;
