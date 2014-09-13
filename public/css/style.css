@@ -21,6 +21,7 @@ header#primary-header nav button.discourage { opacity: .5; }
 #minimap #minimap-list { background-color: rgba(70, 62, 64, 0.5); padding-bottom: 22px; padding-left: 20px; position: relative; left: 0; width: 200px; height: auto; -webkit-transition: all 500ms; transition: all 500ms; }
 #minimap #minimap-list li { font-size: 11px; line-height: 11px; list-style: none; padding-top: 11px; position: relative; z-index: 1; }
 #minimap #minimap-list li.minimap-year { color: black; font-family: "Source Sans Pro Extra Light"; margin-top: 11px; text-align: left; }
+#minimap #minimap-list li.minimap-year:first-child { margin-top: 0; }
 #minimap #minimap-list li.minimap-interlude { color: #00b3ff; font-family: "Source Sans Pro Black"; text-transform: uppercase; }
 #minimap #minimap-list li.minimap-name { color: white; font-family: "Source Sans Pro Black"; text-transform: uppercase; }
 #minimap:hover { right: 0; }
@@ -67,12 +68,13 @@ svg .x-axis text { fill: white; font-family: "Source Sans Pro Extra Light"; font
 #overlay .x { position: absolute; top: 44px; right: 44px; z-index: 2; }
 #overlay .overlay { display: none; position: absolute; overflow: scroll; top: 0; left: 0; width: 100%; height: 100%; }
 #overlay .overlay.active { display: block; }
-#overlay .overlay header.overlay-header h1 { color: black; font-size: 88px; padding-top: 88px; text-align: center; }
-#overlay .overlay section { margin-top: 88px; }
-#overlay .overlay section h2 { color: #00b3ff; margin-bottom: 44px; text-align: center; }
-#overlay .overlay section p { color: black; margin: 0 auto; max-width: 600px; width: 90%; }
-#overlay .overlay section h3 { color: #8c7c80; font-size: 22px; margin: 0 auto; margin-top: 44px; max-width: 600px; width: 90%; }
-#overlay .overlay section h4 { color: #8c7c80; font-family: "Source Sans Pro Extra Light"; font-size: 14.66667px; margin: 0 auto; text-transform: uppercase; max-width: 600px; width: 90%; }
+#overlay .overlay header.overlay-header { margin-left: 44px; }
+#overlay .overlay header.overlay-header h1 { color: #00b3ff; font-size: 88px; padding-top: 88px; }
+#overlay .overlay section { margin-top: 88px; margin-left: 44px; }
+#overlay .overlay section h2 { color: #463e40; margin-bottom: 44px; }
+#overlay .overlay section p { color: black; max-width: 600px; width: 90%; }
+#overlay .overlay section h3 { color: #8c7c80; font-size: 22px; margin-top: 44px; max-width: 600px; width: 90%; }
+#overlay .overlay section h4 { color: #8c7c80; font-family: "Source Sans Pro Extra Light"; font-size: 14.66667px; text-transform: uppercase; max-width: 600px; width: 90%; }
 
 #stream-wrapper { background-color: #231f20; overflow-y: scroll; position: absolute; top: 44px; left: 0; width: 100%; height: calc(100% - 44px); -webkit-transition: background-color 1s; transition: background-color 1s; }
 #stream-wrapper.active-interlude { background-color: #231f20; }

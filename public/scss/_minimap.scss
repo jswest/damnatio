@@ -32,6 +32,9 @@
         font-family: "Source Sans Pro Extra Light";
         margin-top: $headerheight / 4;
         text-align: left;
+        &:first-child {
+          margin-top: 0;
+        }
       }
       &.minimap-interlude {
         color: $color6;
