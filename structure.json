@@ -16,7 +16,19 @@
         }
       ]
     },
-     {
+    {
+      "id": "modern-executions-interlude",
+      "name": "Modern Executions",
+      "year": "1993",
+      "panes": [
+        {
+          "type": "narration-title",
+          "title": "Modern Executions",
+          "subtitle": "Explore the last 40 years of executions."
+        }
+      ]
+    },
+    {
       "id": "unusual-punishment-interlude",
       "name": "Unusual Punishment",
       "year": "1998",
