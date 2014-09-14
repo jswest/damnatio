@@ -2,12 +2,23 @@ DAB.interludes.push(new DAB.Interlude({
 
 
   el: $('#unusual-punishment-interlude'),
+
+
+
   url: 'unusual-punishment.json',
+
+
+
   title: 'unusual punishment',
   subtitle: 'how a small minority of counties account for the vast majority of executions',
 
+
+
+
   build: function (data) {
     var that = this;
+
+    that.createSharedElements();
 
     // TODO move this to the interludes.js file
     var c = d3.scale.ordinal()
@@ -35,7 +46,7 @@ DAB.interludes.push(new DAB.Interlude({
     };
 
     // the key
-    el.append(
+    that.el.append(
       '<table class="key">' +
         '<tr>' +
           '<td class="colorblock"></td>' +
@@ -59,7 +70,7 @@ DAB.interludes.push(new DAB.Interlude({
         '</tr>' +
       '</table>'
     );
-    var table = el.find('table.key');
+    var table = that.el.find('table.key');
     for (var i = 0; i < table.find('td.colorblock').length; i++) {
       table.find('td.colorblock').eq(i).css('background-color', c(i));
     }
@@ -73,9 +84,10 @@ DAB.interludes.push(new DAB.Interlude({
       .projection(projection);
 
 
+    console.log(that);
     that.svg.append('g').attr('class', 'counties')
       .selectAll("path.county")
-      .data(topojson.feature(topology, topology.objects.counties).features)
+      .data(topojson.feature(data, data.objects.counties).features)
       .enter()
       .append("path")
       .attr('id', function (d) {
@@ -91,9 +103,9 @@ DAB.interludes.push(new DAB.Interlude({
       .style('fill', function (d) {
         return c(range(d.properties.count));
       });
-    svg.append('g').attr('class', 'states')
+    that.svg.append('g').attr('class', 'states')
       .selectAll('path.state')
-      .data(topojson.feature(topology, topology.objects.states).features)
+      .data(topojson.feature(data, data.objects.states).features)
       .enter()
       .append('path')
       .attr('d', path)
@@ -106,12 +118,11 @@ DAB.interludes.push(new DAB.Interlude({
       .on('mouseover', function (e) {
         var d = d3.select(this).datum();
         if (d.properties.count !== "false" && d.properties.count > 0) {
-          console.log(d.properties)
           var name  = d.properties.county
           ,   count = d.properties.count
           ,   state = d.properties.state;
-          if (el.find('.inspector').length === 0) {
-            el.append(
+          if (that.el.find('.inspector').length === 0) {
+            that.el.append(
               '<ul class="inspector">' +
                   '<li>' + name + '</li>' +
                   '<li>' + count + ' executions</li>' +
@@ -129,9 +140,7 @@ DAB.interludes.push(new DAB.Interlude({
       })
       .on('mouseout', function (e) {
         that.el.find('.inspector').remove();
-      })
-
-
+      });
 
   }
 

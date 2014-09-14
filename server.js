@@ -25,6 +25,9 @@ app.get( '/', function (req, res) {
 app.get('/last-words.json', function (req, res) {
   res.send(require('./data/interludes/last-words/last-words.json'));
 });
+app.get('/unusual-punishment.json', function (req, res) {
+  res.send(require('./data/interludes/unusual-punishment/us.topo.json'));
+});
 
 // Start yer engines.
 http
