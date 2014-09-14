@@ -183,4 +183,20 @@ svg {
       font-size: 15px;
     }
   }
+  .y-axis {
+    path.domain {
+      fill: none;
+    }
+    text {
+      fill: $color7;
+      font-family: "Source Sans Pro Extra Light";
+      font-size: 15px;
+    }
+    g.tick {
+      line {
+        stroke: rgba(255,255,255,.25);
+        stroke-width: 1px;
+      }
+    }
+  }
 }

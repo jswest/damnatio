@@ -31,6 +31,9 @@ app.get('/unusual-punishment.json', function (req, res) {
 app.get('/how-we-kill.json', function (req, res) {
   res.send(require('./data/interludes/how-we-kill/combined-method.json'));
 });
+app.get('/modern-executions.json', function (req, res) {
+  res.send(require('./data/interludes/how-we-kill/raw/dpic/dpic.json'));
+});
 
 // Start yer engines.
 http

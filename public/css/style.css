@@ -62,6 +62,9 @@ svg path.county { stroke: #231f20; stroke-width: 0.25px; }
 svg path.state { fill: transparent; pointer-events: none; stroke: #231f20; stroke-width: 1px; }
 svg .x-axis path.domain { fill: none; }
 svg .x-axis text { fill: white; font-family: "Source Sans Pro Extra Light"; font-size: 15px; }
+svg .y-axis path.domain { fill: none; }
+svg .y-axis text { fill: white; font-family: "Source Sans Pro Extra Light"; font-size: 15px; }
+svg .y-axis g.tick line { stroke: rgba(255, 255, 255, 0.25); stroke-width: 1px; }
 
 #overlay { background-color: rgba(255, 255, 255, 0.55); display: none; position: absolute; top: 0; left: 0; width: 100%; height: calc(100% - 44px); z-index: 10; }
 #overlay.active { display: block; top: 44px; }
