@@ -28,6 +28,29 @@ var builder = {
 
     executionsByYear = _.groupBy(executions, 'year');
 
+    var minimapSections = [];
+    _.each(executionsByYear, function (list, year) {
+      minimapSections.push({
+        type: "year",
+        year: year,
+      });
+      _.each(list, function (name) {
+        if (typeof name.essay !== 'undefined') {
+          minimapSections.push({
+            type: "name",
+            name: name.name
+          });
+        }
+      });
+      var interlude = _.findWhere(structure.interludes, {year: year});
+      if (interlude) {
+        minimapSections.push({
+          type: "interlude",
+          name: interlude.name
+        });
+      }
+    });
+
     var sections = [];
     _.each(executionsByYear, function(list, year) {
       sections.push({
@@ -39,11 +62,18 @@ var builder = {
       if (interlude) {
         sections.push({
           type: "interlude",
-          id: interlude.id
+          id: interlude.id,
+          panes: interlude.panes || []
         });
       }
     });
-    fs.writeFileSync('index.html', templateFn({sections: sections}));
+    fs.writeFileSync(
+      'views/index.html',
+      templateFn({
+        sections: sections,
+        minimaps: minimapSections
+      })
+    );
   }
 }
 

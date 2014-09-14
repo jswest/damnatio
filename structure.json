@@ -1,14 +1,48 @@
 {
   "interludes": [
     {
-      "id": "some-id",
-      "year": "2014",
-      "class": "DAB.WhateverSection"
+      "id": "last-words-interlude",
+      "name": "Last Words",
+      "year": "1988",
+      "panes": [
+        {
+          "type": "narration-title",
+          "title": "Last Words",
+          "subtitle": "Final statements from the condemned in Texas"
+        },
+        {
+          "type": "narration-paragraph",
+          "paragraph": "Texas keeps a database of the last words of its condemned. The following are the top fifty most common words for their final statments. Clicking on each bubble brings up a representative statement in full."
+        }
+      ]
     },
      {
-      "id": "some-other-id",
-      "year": "2013",
-      "class": "DAB.WhateverSection"
+      "id": "unusual-punishment-interlude",
+      "name": "Unusual Punishment",
+      "year": "1998",
+      "panes": [
+        {
+          "type": "narration-title",
+          "title": "Unusual Punishment",
+          "subtitle": "How a small minority of counties account for a vast majority of executions."
+        },
+        {
+          "type": "narration-paragraph",
+          "paragraph": "According to a study by the Death Penalty Information Center, roughly 10 percent of counties represent 90 percent of executions. Here is a map of the executions by county. Hovering on a county brings up more information."
+        }
+      ]
+    },
+    {
+      "id": "how-we-kill-interlude",
+      "name": "How We Kill",
+      "year": "2004",
+      "panes": [
+        {
+          "type": "narration-title",
+          "title": "How We Kill",
+          "subtitle": "A look at methods of execution from 1776 to present"
+        }
+      ]
     }
   ]
 }

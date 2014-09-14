@@ -1,380 +1,113 @@
-* {
-  margin: 0;
-  padding: 0; }
+* { margin: 0; padding: 0; }
 
-h1, h2, h3 {
-  color: #8c7c80;
-  font-family: "Source Sans Pro Black";
-  font-size: 44px;
-  line-height: 1;
-  text-transform: uppercase; }
+h1, h2, h3 { color: #8c7c80; font-family: "Source Sans Pro Black"; font-size: 44px; line-height: 1; text-transform: uppercase; }
 
-button {
-  background-color: transparent;
-  border: none;
-  border-radius: 0;
-  cursor: pointer;
-  display: block;
-  font-family: "Source Sans Pro Extra Light"; }
-  button:focus {
-    outline: none; }
+button { background-color: transparent; border: none; border-radius: 0; cursor: pointer; display: block; font-family: "Source Sans Pro Extra Light"; }
+button:focus { outline: none; }
 
-.x {
-  background-image: url("../images/big-x.png");
-  cursor: pointer;
-  position: absolute;
-  top: 88px;
-  right: 44px;
-  width: 100px;
-  height: 100px; }
+.x { background-image: url("../images/big-x.png"); cursor: pointer; position: absolute; top: 0; right: 44px; width: 100px; height: 100px; }
 
-p {
-  color: #d2bbc0;
-  font-family: "PT Serif";
-  font-size: 15px;
-  line-height: 33px;
-  margin-bottom: 33px; }
+p, ul li { color: #d2bbc0; font-family: "PT Serif"; font-size: 15px; line-height: 33px; margin-bottom: 33px; }
 
-html,
-body {
-  background-color: #231f20;
-  overflow: hidden;
-  width: 100%;
-  height: 100%; }
+html, body { background-color: #231f20; overflow: hidden; width: 100%; height: 100%; }
 
-header#primary-header {
-  background-color: black;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 44px;
-  z-index: 3; }
-  header#primary-header h1 {
-    color: #8c7c80;
-    font-size: 22px;
-    line-height: 44px;
-    padding-left: 44px;
-    text-transform: uppercase; }
-  header#primary-header nav {
-    position: absolute;
-    top: 0;
-    right: 44px;
-    width: 200px; }
-    header#primary-header nav button {
-      color: #8c7c80;
-      float: right;
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 22px;
-      margin-left: 22px;
-      margin-top: 11px;
-      text-transform: uppercase;
-      height: 22px;
-      -webkit-transition: opacity 0.5s;
-      transition: opacity 0.5s; }
-      header#primary-header nav button.discourage {
-        opacity: .5; }
+header#primary-header { background-color: black; position: absolute; top: 0; left: 0; width: 100%; height: 44px; z-index: 3; }
+header#primary-header h1 { color: #8c7c80; font-size: 22px; line-height: 44px; padding-left: 44px; text-transform: uppercase; }
+header#primary-header nav { position: absolute; top: 0; right: 44px; width: 200px; }
+header#primary-header nav button { color: #8c7c80; float: right; font-size: 18px; font-weight: 400; line-height: 22px; margin-left: 22px; margin-top: 11px; text-transform: uppercase; height: 22px; -webkit-transition: opacity 0.5s; transition: opacity 0.5s; }
+header#primary-header nav button.discourage { opacity: .5; }
 
-#minimap {
-  cursor: pointer;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  position: absolute;
-  top: 44px;
-  right: 0;
-  width: 220px;
-  height: calc(100% - 44px);
-  z-index: 3;
-  -webkit-transition: all 500ms;
-  transition: all 500ms; }
-  #minimap #minimap-list {
-    padding-bottom: 22px;
-    position: relative;
-    left: 22px;
-    width: 200px;
-    height: auto; }
-    #minimap #minimap-list li {
-      font-size: 11px;
-      line-height: 22px;
-      list-style: none;
-      position: relative;
-      width: 100%;
-      z-index: 1; }
-      #minimap #minimap-list li.year {
-        color: #8c7c80;
-        font-family: "Source Sans Pro Extra Light";
-        padding-top: 11px;
-        margin-left: 22px; }
-      #minimap #minimap-list li.interlude {
-        color: #00b3ff;
-        font-family: "Source Sans Pro Black";
-        padding-top: 11px;
-        text-transform: uppercase; }
-      #minimap #minimap-list li.name {
-        color: white;
-        font-family: "Source Sans Pro Black";
-        margin-left: 22px;
-        text-transform: uppercase; }
-    #minimap #minimap-list .color {
-      background-color: #463e40;
-      opacity: 0.75;
-      position: absolute;
-      top: 0;
-      left: -22px;
-      width: 220px;
-      height: 100%;
-      z-index: 0;
-      -webkit-transition: all 500ms;
-      transition: all 500ms; }
-  #minimap.collapsed {
-    right: -200px; }
-    #minimap.collapsed #minimap-list .color {
-      opacity: 0; }
-    #minimap.collapsed:hover {
-      right: 0; }
-      #minimap.collapsed:hover #minimap-list .color {
-        opacity: 0.75; }
+#minimap { cursor: pointer; overflow-x: hidden; overflow-y: scroll; position: absolute; top: 44px; right: -200px; width: 220px; height: calc(100% - 44px); z-index: 3; -webkit-transition: all 500ms; transition: all 500ms; }
+#minimap #minimap-list { background-color: rgba(70, 62, 64, 0.5); padding-bottom: 22px; padding-left: 20px; position: relative; left: 0; width: 200px; height: auto; -webkit-transition: all 500ms; transition: all 500ms; }
+#minimap #minimap-list li { font-size: 11px; line-height: 11px; list-style: none; padding-top: 11px; position: relative; z-index: 1; }
+#minimap #minimap-list li.minimap-year { color: black; font-family: "Source Sans Pro Extra Light"; margin-top: 11px; text-align: left; }
+#minimap #minimap-list li.minimap-year:first-child { margin-top: 0; }
+#minimap #minimap-list li.minimap-interlude { color: #00b3ff; font-family: "Source Sans Pro Black"; text-transform: uppercase; }
+#minimap #minimap-list li.minimap-name { color: white; font-family: "Source Sans Pro Black"; text-transform: uppercase; }
+#minimap:hover { right: 0; }
+#minimap:hover #minimap-list { background-color: #8c7c80; }
 
-.inspector {
-  position: absolute;
-  width: 200px;
-  height: 44px; }
-  .inspector li {
-    color: white;
-    font-size: 13px;
-    line-height: 22px;
-    font-family: "Source Sans Pro Extra Light";
-    font-weight: 400;
-    list-style: none;
-    text-align: center;
-    text-transform: uppercase;
-    height: 22px; }
-  .inspector th,
-  .inspector td {
-    color: white;
-    float: left;
-    font-size: 13px;
-    line-height: 22px;
-    text-transform: uppercase;
-    height: 22px; }
-  .inspector th {
-    font-family: "Source Sans Pro Extra Light";
-    padding-right: 5px; }
-  .inspector td {
-    font-family: "Source Sans Pro Black";
-    padding-left: 5px; }
+.inspector { position: absolute; width: 200px; height: 44px; }
+.inspector li { color: white; font-size: 13px; line-height: 22px; font-family: "Source Sans Pro Extra Light"; font-weight: 400; line-height: 22px; list-style: none; margin-bottom: 0; text-align: center; text-transform: uppercase; height: 22px; }
+.inspector th, .inspector td { color: white; float: left; font-size: 13px; line-height: 22px; text-transform: uppercase; height: 22px; }
+.inspector th { font-family: "Source Sans Pro Extra Light"; padding-right: 5px; }
+.inspector td { font-family: "Source Sans Pro Black"; padding-left: 5px; }
 
-table.key {
-  position: absolute;
-  top: 44px;
-  right: 0;
-  width: 2 22px;
-  z-index: 2; }
-  table.key tr {
-    height: 22px; }
-  table.key td.colorblock {
-    padding-left: 0;
-    width: 22px;
-    height: 22px; }
-  table.key td {
-    color: #d2bbc0;
-    font-family: "Source Sans Pro Extra Light";
-    font-size: 11px;
-    line-height: 22px;
-    padding-left: 22px;
-    text-transform: uppercase;
-    width: 178px;
-    height: 22px; }
+table.key { position: absolute; top: 44px; right: 0; width: 2 22px; z-index: 2; }
+table.key tr { height: 22px; }
+table.key td.colorblock { padding-left: 0; width: 22px; height: 22px; }
+table.key td { color: #d2bbc0; font-family: "Source Sans Pro Extra Light"; font-size: 11px; line-height: 22px; padding-left: 22px; text-transform: uppercase; width: 178px; height: 22px; }
 
-.words-overlay {
-  background-color: rgba(255, 255, 255, 0.75);
-  cursor: pointer;
-  overflow: hidden;
-  position: fixed;
-  top: 44px;
-  left: 0;
-  width: 100%;
-  height: calc(100% - 44px);
-  z-index: 3; }
-  .words-overlay .words {
-    margin-top: 44px;
-    margin-left: 44px;
-    padding-right: 22px;
-    padding-bottom: 22px;
-    overflow-y: scroll;
-    width: 600px;
-    height: 100%; }
-    .words-overlay .words h1 {
-      font-size: 44px;
-      margin-bottom: 44px;
-      text-transform: uppercase; }
-    .words-overlay .words br {
-      height: 33px; }
-    .words-overlay .words p {
-      color: #231f20;
-      margin-bottom: 0;
-      padding-bottom: 88px;
-      width: 100%; }
+.words-overlay { background-color: rgba(255, 255, 255, 0.55); cursor: pointer; overflow: hidden; position: fixed; top: 44px; left: 0; width: 100%; height: calc(100% - 44px); z-index: 3; }
+.words-overlay .x { top: 44px; }
+.words-overlay .words { margin-top: 44px; margin-left: 44px; padding-right: 22px; padding-bottom: 22px; overflow-y: scroll; width: 600px; height: 100%; }
+.words-overlay .words h1 { font-size: 44px; margin-bottom: 44px; text-transform: uppercase; }
+.words-overlay .words br { height: 33px; }
+.words-overlay .words p { color: #231f20; margin-bottom: 0; padding-bottom: 88px; width: 100%; }
 
-ul.controls {
-  position: absolute;
-  top: 110px;
-  left: 44px;
-  width: 264px;
-  z-index: 2; }
-  ul.controls li {
-    background-color: #463e40;
-    color: white;
-    cursor: pointer;
-    display: block;
-    font-family: "Source Sans Pro Extra Light";
-    font-size: 14.66667px;
-    line-height: 44px;
-    list-style: none;
-    margin-top: 11px;
-    text-align: center;
-    text-transform: uppercase;
-    height: 44px;
-    transition: all 500ms; }
-    ul.controls li:hover {
-      background-color: black; }
-    ul.controls li.active {
-      background-color: black;
-      font-family: "Source Sans Pro Black"; }
-  ul.controls.clicked {
-    height: auto; }
+ul.controls { position: absolute; top: 110px; left: 44px; width: 264px; z-index: 2; }
+ul.controls li { background-color: #463e40; color: white; cursor: pointer; display: block; font-family: "Source Sans Pro Extra Light"; font-size: 14.66667px; line-height: 44px; list-style: none; margin-top: 11px; text-align: center; text-transform: uppercase; height: 44px; transition: all 500ms; }
+ul.controls li:hover { background-color: black; }
+ul.controls li.active { background-color: black; font-family: "Source Sans Pro Black"; }
+ul.controls.clicked { height: auto; }
 
-svg g.bubble-wrapper {
-  cursor: pointer; }
-  svg g.bubble-wrapper circle {
-    fill: #463e40;
-    transition: all 500ms; }
-  svg g.bubble-wrapper.active circle, svg g.bubble-wrapper:hover circle {
-    fill: #00b3ff; }
-  svg g.bubble-wrapper.active.parent circle, svg g.bubble-wrapper:hover.parent circle {
-    fill: none; }
-  svg g.bubble-wrapper text {
-    fill: white;
-    font-family: "Source Sans Pro Extra Light";
-    font-weight: 400;
-    letter-spacing: 1px;
-    text-anchor: middle;
-    text-transform: uppercase; }
-  svg g.bubble-wrapper.parent circle {
-    fill: none; }
-  svg g.bubble-wrapper.parent circle:hover {
-    fill: none; }
-svg path.county {
-  stroke: #231f20;
-  stroke-width: 0.25px; }
-svg path.state {
-  fill: transparent;
-  pointer-events: none;
-  stroke: #231f20;
-  stroke-width: 1px; }
-svg .x-axis path.domain {
-  fill: none; }
-svg .x-axis text {
-  fill: white;
-  font-family: "Source Sans Pro Extra Light";
-  font-size: 15px; }
+svg g.bubble-wrapper { cursor: pointer; }
+svg g.bubble-wrapper circle { fill: #463e40; transition: all 500ms; }
+svg g.bubble-wrapper.active circle, svg g.bubble-wrapper:hover circle { fill: #00b3ff; }
+svg g.bubble-wrapper.active.parent circle, svg g.bubble-wrapper:hover.parent circle { fill: none; }
+svg g.bubble-wrapper text { fill: white; font-family: "Source Sans Pro Extra Light"; font-weight: 400; letter-spacing: 1px; text-anchor: middle; text-transform: uppercase; }
+svg g.bubble-wrapper.parent circle { fill: none; }
+svg g.bubble-wrapper.parent circle:hover { fill: none; }
+svg path.county { stroke: #231f20; stroke-width: 0.25px; }
+svg path.state { fill: transparent; pointer-events: none; stroke: #231f20; stroke-width: 1px; }
+svg .x-axis path.domain { fill: none; }
+svg .x-axis text { fill: white; font-family: "Source Sans Pro Extra Light"; font-size: 15px; }
 
-#stream-wrapper {
-  background-color: #463e40;
-  overflow-y: scroll;
-  position: absolute;
-  top: 44px;
-  left: 0;
-  width: 100%;
-  height: calc(100% - 44px);
-  -webkit-transition: background-color 1s;
-  transition: background-color 1s; }
-  #stream-wrapper.active-interlude {
-    background-color: #231f20; }
+#overlay { background-color: rgba(255, 255, 255, 0.55); display: none; position: absolute; top: 0; left: 0; width: 100%; height: calc(100% - 44px); z-index: 10; }
+#overlay.active { display: block; top: 44px; }
+#overlay .x { position: absolute; top: 44px; right: 44px; z-index: 2; }
+#overlay .overlay { display: none; position: absolute; overflow: scroll; top: 0; left: 0; width: 100%; height: 100%; }
+#overlay .overlay.active { display: block; }
+#overlay .overlay header.overlay-header { margin-left: 44px; }
+#overlay .overlay header.overlay-header h1 { color: #00b3ff; font-size: 88px; padding-top: 88px; }
+#overlay .overlay section { margin-top: 88px; margin-left: 44px; }
+#overlay .overlay section h2 { color: #463e40; margin-bottom: 44px; }
+#overlay .overlay section p { color: black; max-width: 600px; width: 90%; }
+#overlay .overlay section h3 { color: #8c7c80; font-size: 22px; margin-top: 44px; max-width: 600px; width: 90%; }
+#overlay .overlay section h4 { color: #8c7c80; font-family: "Source Sans Pro Extra Light"; font-size: 14.66667px; text-transform: uppercase; max-width: 600px; width: 90%; }
 
-#stream {
-  padding-bottom: 44px; }
-  #stream .interlude {
-    padding-bottom: 200px;
-    opacity: 1;
-    -webkit-transition: opacity 500ms;
-    transition: opacity 500ms; }
-    #stream .interlude.out {
-      opacity: 0; }
-  #stream .pane {
-    clear: both;
-    position: relative;
-    width: 100%; }
-    #stream .pane.interactive h1.graph-title {
-      font-size: 44px;
-      position: absolute;
-      left: 44px; }
-    #stream .pane.narration h1, #stream .pane.narration h2, #stream .pane.narration h3 {
-      margin-left: 44px;
-      position: absolute; }
-    #stream .pane.narration h1.project-title {
-      font-size: 88px;
-      top: calc(50% - 176px); }
-    #stream .pane.narration h2.byline {
-      color: #463e40;
-      font-size: 22px;
-      top: calc(50% + 88px); }
-    #stream .pane.narration p {
-      color: #8c7c80;
-      font-family: "Source Sans Pro Black";
-      font-size: 33px;
-      line-height: 44px;
-      margin-top: 200px;
-      margin-left: 44px;
-      width: 800px; }
-    #stream .pane.narration h1.title {
-      font-size: 88px;
-      position: absolute;
-      top: calc(50% - 44px); }
-    #stream .pane.narration h2.subtitle {
-      color: #463e40;
-      font-family: "Source Sans Pro Extra Light";
-      font-size: 22px;
-      position: absolute;
-      top: calc(50% + 44px); }
-    #stream .pane.narration h3.kicker {
-      color: #00b3ff;
-      font-size: 14.66667px;
-      position: absolute;
-      top: calc(50% - 88px); }
-  #stream .year {
-    clear: both;
-    position: relative;
-    left: 44px;
-    width: calc(100% - 44px); }
-    #stream .year .year-marker {
-      padding-top: 44px; }
-      #stream .year .year-marker h1 {
-        color: #463e40;
-        font-size: 29.33333px; }
-    #stream .year .name {
-      float: left;
-      width: 400px;
-      height: 44px; }
-      #stream .year .name h1 {
-        font-family: "Source Sans Pro Extra Light";
-        font-size: 29.33333px; }
-      #stream .year .name.essay h1 {
-        color: #d2bbc0;
-        cursor: pointer;
-        font-family: "Source Sans Pro Black"; }
-      #stream .year .name.essay .essay-wrapper {
-        margin-top: 44px;
-        width: 600px; }
-        #stream .year .name.essay .essay-wrapper p {
-          color: #d2bbc0; }
-      #stream .year .name.essay .x {
-        opacity: 0; }
-      #stream .year .name.essay.expanded {
-        clear: both;
-        position: relative;
-        width: 100%;
-        height: auto; }
-        #stream .year .name.essay.expanded .x {
-          opacity: 1; }
+#stream-wrapper { background-color: #231f20; overflow-y: scroll; position: absolute; top: 44px; left: 0; width: 100%; height: calc(100% - 44px); -webkit-transition: background-color 1s; transition: background-color 1s; }
+#stream-wrapper.active-interlude { background-color: #231f20; }
+
+#stream { padding-bottom: 44px; }
+#stream.blur { -webkit-filter: blur(15px); filter: blur(15px); }
+#stream .interlude { clear: both; padding-bottom: 200px; opacity: 1; -webkit-transition: opacity 500ms; transition: opacity 500ms; }
+#stream .interlude.out { opacity: 0; }
+#stream .pane { clear: both; display: block; position: relative; width: 100%; }
+#stream .pane.interactive h1.interactive-title { color: #00b3ff; position: absolute; top: 0; left: 44px; }
+#stream .pane.interactive h1.interactive-title.blur { -webkit-filter: blur(15px); filter: blur(15px); }
+#stream .pane.interactive h2.interactive-subtitle { color: #463e40; font-family: "Source Sans Pro Extra Light"; font-size: 22px; position: absolute; left: 44px; top: 44px; }
+#stream .pane.interactive h2.interactive-subtitle.blur { -webkit-filter: blur(15px); filter: blur(15px); }
+#stream .pane.narration h1, #stream .pane.narration h2, #stream .pane.narration h3 { margin-left: 44px; position: absolute; }
+#stream .pane.narration h1.project-title { font-size: 88px; top: calc(50% - 176px); }
+#stream .pane.narration h2.byline { color: #463e40; font-size: 22px; top: calc(50% + 88px); }
+#stream .pane.narration p { color: #8c7c80; font-family: "Source Sans Pro Black"; font-size: 33px; line-height: 44px; margin-top: 200px; margin-left: 44px; width: 800px; }
+#stream .pane.narration h1.title { font-size: 88px; position: absolute; top: calc(50% - 44px); }
+#stream .pane.narration h2.subtitle { color: #463e40; font-family: "Source Sans Pro Extra Light"; font-size: 22px; position: absolute; top: calc(50% + 44px); }
+#stream .pane.narration h3.kicker { color: #00b3ff; font-size: 14.66667px; position: absolute; top: calc(50% - 88px); }
+#stream .year { clear: both; position: relative; left: 44px; width: calc(100% - 44px); }
+#stream .year .year-marker { padding-top: 44px; }
+#stream .year .year-marker h1 { color: #463e40; font-size: 22px; line-height: 44px; }
+#stream .year .name { float: left; width: 350px; height: 29.33333px; }
+#stream .year .name h1 { font-family: "Source Sans Pro Extra Light"; font-size: 22px; }
+#stream .year .name.essay h1 { color: #d2bbc0; cursor: pointer; font-family: "Source Sans Pro Black"; }
+#stream .year .name.essay h2 { font-size: 22px; line-height: 22px; margin-top: 44px; }
+#stream .year .name.essay h3 { font-size: 14px; line-height: 22px; margin-top: 44px; }
+#stream .year .name.essay .essay-wrapper { display: none; margin-top: 44px; padding-bottom: 88px; width: 600px; }
+#stream .year .name.essay .essay-wrapper p { color: #d2bbc0; }
+#stream .year .name.essay .essay-wrapper p a { color: #00b3ff; font-weight: 800; text-decoration: none; }
+#stream .year .name.essay .x { opacity: 0; }
+#stream .year .name.essay.expanded { clear: both; position: relative; width: 100%; height: auto; }
+#stream .year .name.essay.expanded h1 { font-size: 44px; }
+#stream .year .name.essay.expanded .x { opacity: 1; }
+#stream .year .name.essay.expanded .essay-wrapper { display: block; }
