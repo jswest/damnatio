@@ -31,6 +31,18 @@
           "paragraph": "According to a study by the Death Penalty Information Center, roughly 10 percent of counties represent 90 percent of executions. Here is a map of the executions by county. Hovering on a county brings up more information."
         }
       ]
+    },
+    {
+      "id": "how-we-kill-interlude",
+      "name": "How We Kill",
+      "year": "2004",
+      "panes": [
+        {
+          "type": "narration-title",
+          "title": "How We Kill",
+          "subtitle": "A look at methods of execution from 1776 to present"
+        }
+      ]
     }
   ]
 }

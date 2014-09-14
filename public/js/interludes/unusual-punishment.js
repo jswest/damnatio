@@ -84,7 +84,6 @@ DAB.interludes.push(new DAB.Interlude({
       .projection(projection);
 
 
-    console.log(that);
     that.svg.append('g').attr('class', 'counties')
       .selectAll("path.county")
       .data(topojson.feature(data, data.objects.counties).features)

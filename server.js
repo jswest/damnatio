@@ -28,6 +28,9 @@ app.get('/last-words.json', function (req, res) {
 app.get('/unusual-punishment.json', function (req, res) {
   res.send(require('./data/interludes/unusual-punishment/us.topo.json'));
 });
+app.get('/how-we-kill.json', function (req, res) {
+  res.send(require('./data/interludes/how-we-kill/combined-method.json'));
+});
 
 // Start yer engines.
 http
