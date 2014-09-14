@@ -78,7 +78,7 @@ DAB.interludes.push(new DAB.Interlude({
 
 
     var projection = d3.geo.albersUsa()
-      .scale($(window).width() + 300)
+      .scale($(window).width() + 150)
       .translate([that.el.width() / 2, that.el.height() / 2]);
     var path = d3.geo.path()
       .projection(projection);
