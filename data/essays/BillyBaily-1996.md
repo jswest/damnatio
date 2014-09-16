@@ -1,0 +1,15 @@
+In 1996, 374 years after the first legal hanging in the United States, Billy Bailey became the last US prisoner to be hanged.
+
+While out of prison on parole in 1979, Bailey escaped from a work release facility in Delaware. He sought refuge with his foster sister, but he was soon back in trouble when he robbed a liquor store at gunpoint. Knowing the cops would soon arrive, he fled to a farm where he intended to steal a pickup truck. Instead, he entered the house and shot the elderly couple who lived there. After arranging his victims in chairs, he ran into the woods, guns in hand, where he was soon caught and arrested. The following year, Bailey was sentenced to death by hanging, the sole means of execution in Delaware.
+
+Hanging was the primary means of execution in the United States from the colonies until 1890. At that point most states replaced it with the electric chair, which was said to be a more humane option. Delaware was one of few states that didn’t make the switch. Hanging remained the only option for Delaware’s condemned until 1986, when the state began to use lethal injection.
+
+Because Bailey was sentenced before lethal injection was adopted, Delaware gave him a choice between the needle and the noose. He chose the latter, saying: “I feel the law sentenced me to hang, and I should hang.”
+
+Though Delaware had a gallows, the state had not performed a hanging in 50 years, and officials were nervous about mishaps. The prison tried to get Bailey to allow for lethal injection, but he refused, saying, “I’m not a dog. I won’t let them put me to sleep.” At the time of Bailey’s execution, Montana, New Hampshire, and Washington were the only other states that maintained hanging as an option. To learn how to properly perform the execution, correctional officers from Delaware traveled to Washington—the only state that had used the method in 30 years.
+
+Because of its rarity, Bailey’s execution drew international attention. There were 40 people in attendance, including seven official witnesses, twelve reporters, members of the victims’ family, and Bailey’s attorney. Outside, 60 death penalty opponents held a candlelight vigil. There was another vigil, too—this one attended by twenty death penalty supporters, including the victims’ grandson and great grandson. Despite the doubts, the execution went off without complication, and Bailey was pronounced dead at 12:15am on January 25th, 1996.
+
+Two other Delaware inmates, William H. Flamer and James W. Riley, were sentenced to death before the switch to lethal injection. Like Bailey, they were given a choice between the methods. Flamer chose injection and was executed five days after Bailey, and Riley refused to choose and was later resentenced to life in prison.
+
+Delaware tore down its gallows on July 8th, 2003. Today, Washington and New Hampshire are the only states that still allow hanging. Those condemned in Washington are given the choice between lethal injection and hanging, and if no choice is made then it defaults to injection. In New Hampshire, hanging is retained as a backup, though the state has neither a gallows nor an execution chamber.
