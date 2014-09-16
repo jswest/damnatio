@@ -145,8 +145,8 @@ DAB.interludes.push(new DAB.Interlude({
         .transition()
         .delay(500)
         .duration(700)
-        .attr('width', oneYearsWidth - 2)
-        .attr('height', h(1) - 2)
+        .attr('width', oneYearsWidth - 1)
+        .attr('height', h(1) - 1)
         .attr('transform', function (d, i) {
           var date = year(d.date).toString();
           indices[date] = indices[date] ? indices[date] + 1 : 1;
@@ -261,7 +261,7 @@ DAB.interludes.push(new DAB.Interlude({
     that.svg.append('g').attr('class', 'x-axis')
     that.svg.select('g.x-axis')
       .call(xAxis)
-      .attr('transform', 'translate(0' + (sizes.height + sizes.top) + ')')
+      .attr('transform', 'translate(0,' + (sizes.height + sizes.top) + ')')
       .selectAll('text')
       .attr('transform', 'translate(' + (oneYearsWidth / 2) + ',0)');
 

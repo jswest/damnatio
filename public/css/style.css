@@ -46,7 +46,7 @@ table.key td { color: #d2bbc0; font-family: "Source Sans Pro Extra Light"; font-
 .words-overlay .words p { color: #231f20; margin-bottom: 0; padding-bottom: 88px; width: 100%; }
 
 ul.controls { position: absolute; top: 110px; left: 44px; width: 264px; z-index: 2; }
-ul.controls li { background-color: #463e40; color: white; cursor: pointer; display: block; font-family: "Source Sans Pro Extra Light"; font-size: 14.66667px; line-height: 44px; list-style: none; margin-top: 11px; text-align: center; text-transform: uppercase; height: 44px; transition: all 500ms; }
+ul.controls li { background-color: #463e40; color: white; cursor: pointer; display: block; font-family: "Source Sans Pro Extra Light"; font-size: 14.66667px; line-height: 44px; list-style: none; margin-top: 11px; margin-bottom: 0; text-align: center; text-transform: uppercase; height: 44px; transition: all 500ms; }
 ul.controls li:hover { background-color: black; }
 ul.controls li.active { background-color: black; font-family: "Source Sans Pro Black"; }
 ul.controls.clicked { height: auto; }
